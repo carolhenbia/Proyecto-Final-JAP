@@ -170,8 +170,10 @@ a.custom-card:hover {
   background-position: right;
   width:50%;
   height:100%;
-  background-image: url("/img/cover_back.png");
+  background-image: url("../img/cover_back.png"); 
   /*  align-content: center;
   justify-content: center;
   display: flex; */
-}
+} /* Dos puntos antes significa que busca en la carpeta anterior, un punto en la misma carpeta.*/
+/*Eje: ahora esta en la carpeta CSS, si pones un punto busca en la carpeta de CSS, si pones dos, busca
+en una carpeta antes de esa. */
