@@ -139,3 +139,39 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+.container-fondo{
+  width: 80%;
+  height: 80%;
+  /* margin-top:30px;
+  margin-bottom: 30px;
+  margin-left: 170px;
+  margin-right: 170px; */
+  display: flex;
+/*   flex-wrap: wrap;
+ *//*   justify-content: center;
+  align-items: center; */
+  background-color: rgb(193, 207, 219);
+  border-radius: 20px;
+}
+
+.container-login {
+  background-color:bisque;
+  width:50%;
+  height:100%;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  /* align-content: center;
+  justify-content: center;
+  display: flex; */
+}
+.container-login-2 {
+  background-color:yellow;
+  background-position: right;
+  width:50%;
+  height:100%;
+  background-image: url("/img/cover_back.png");
+  /*  align-content: center;
+  justify-content: center;
+  display: flex; */
+}

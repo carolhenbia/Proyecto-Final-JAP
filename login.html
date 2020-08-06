@@ -18,7 +18,7 @@
       height: 100%;
     }
 
-    body {
+    /* body {
       display: -ms-flexbox;
       display: flex;
       -ms-flex-align: center;
@@ -26,6 +26,14 @@
       padding-top: 40px;
       padding-bottom: 40px;
       background-color: #f5f5f5;
+    } */
+
+    body {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .signin {
@@ -37,7 +45,7 @@
   </style>
 </head>
 
-<body class="text-center">
+<!-- <body class="text-center">
   <div class="container p-5">
     <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
       <h4 class="alert-heading">¡A trabajar! :)</h4>
@@ -45,7 +53,44 @@
       <hr>
       <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
     </div>
-  </div>
+  </div> -->
+  <div class="container-fondo">
+    <div class="container-login">
+  <form id="login" autocomplete="on">
+    <h1>Iniciar Sesión</h1>
+    <fieldset>
+      <div>
+        <label for="nombreUsuario">Usuario</label>
+        <input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Ingresa tu usuario">
+      </div>
+     <div>
+      <label for="pass">Contraseña</label>
+      <input type="password" id="pass" name="pass" placeholder="Ingresa tu contraseña" required>
+     </div>
+    </fieldset>
+    <fieldset>
+      <div>
+        <label for="recordame">Recordame</label>
+        <input type="checkbox" id="recordame" name="recordame">
+      </div>
+      <div>
+        <a href="#">¿Olvidaste tu contraseña?</a>
+      </div>
+    </fieldset>
+    <div>
+      <button type="submit" id="ingresoUsuario">Ingresar</button>
+    </div>
+    <div>
+      <p>O ingresa por medio de:</p>
+    </div>
+    <div class="container-login-2">
+      texto
+    </div>
+  </form>
+</div>
+</div>
+
+
 
   <script src="js/init.js"></script>
   <script src="js/login.js"></script>
