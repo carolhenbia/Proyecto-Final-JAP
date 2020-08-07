@@ -57,36 +57,41 @@
   <div class="container-fondo">
     <div class="container-login">
   <form id="login" autocomplete="on">
-    <h1>Iniciar Sesión</h1>
-    <fieldset>
-      <div>
-        <label for="nombreUsuario">Usuario</label>
-        <input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Ingresa tu usuario">
+    <span class="titulo-login">Iniciar Sesión</span>
+    <fieldset class="fieldset">
+      <div class="caja-usuario-contraseña">
+        <label for="nombreUsuario"></label>
+        <input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Usuario" class="usuario-contraseña">
       </div>
-     <div>
-      <label for="pass">Contraseña</label>
-      <input type="password" id="pass" name="pass" placeholder="Ingresa tu contraseña" required>
+     <div class="caja-usuario-contraseña">
+      <label for="contraseña"></label>
+      <input type="password" id="contraseña" name="pass" placeholder="Contraseña" required class="usuario-contraseña">
      </div>
     </fieldset>
-    <fieldset>
-      <div>
+    <fieldset class="fieldset">
+      <div class="recordame">
         <label for="recordame">Recordame</label>
-        <input type="checkbox" id="recordame" name="recordame">
+        <input type="checkbox" id="recordame" name="recordame" checked="checked">
       </div>
-      <div>
-        <a href="#">¿Olvidaste tu contraseña?</a>
+      <div class="olvidaste">
+        <a href="#" class="link-olvidaste-contraseña">¿Olvidaste tu contraseña?</a>
+      </div>
+    </fieldset class="fieldset">
+    <fieldset>
+      <div class="caja-boton">
+        <button type="submit" id="boton-ingresar" class="boton-login">Ingresar</button>
       </div>
     </fieldset>
-    <div>
-      <button type="submit" id="ingresoUsuario">Ingresar</button>
-    </div>
-    <div>
-      <p>O ingresa por medio de:</p>
-    </div>
+    <!-- <fieldset class="fieldset">
+      <div>
+        <p>O ingresa por medio de:</p>
+        <img style="width: 50px; height: 50px;" src="./img/facebook-icon.png" alt="icono facebook" class="iconos-redes-login">
+        <img style="width: 50px; height: 50px;" src="./img/google-icon.png" alt="icono google"class="iconos-redes-login">
+      </div>
+    </fieldset> -->
   </form>
 </div>
 <div class="container-login-2">
-  texto
 </div>
 </div>
 
