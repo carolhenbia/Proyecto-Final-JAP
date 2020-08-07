@@ -169,7 +169,7 @@ Los valores negativos colocan la sombra por encima del elemento. */
   background-position: right;
   width: 70%;
   height: 100%;
-  background-image: url("../img/imagen-login-2.png"); 
+  background-image: url("../img/fondo-login.png"); 
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   align-content: center;
