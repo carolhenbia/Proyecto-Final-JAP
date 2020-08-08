@@ -20,43 +20,6 @@ var setCookie = function(name, value) {
     document.cookie = name+'='+value+'; expires=Fri, 31 Dec 2020 23:59:59 GMT';
 } //Coloca la cookie y pone la fecha en que expira
 
-
-//EXPLICAR DESPUES
-
 //window es una variable del navegador que te da herramientas para manejarlo
-/*
-class Perro {
-    const name = "";
 
-    function constructor(name){
-        this.name = name;
-    }
 
-    function ladrar(){...}
-}
-
-class Persona {
-    const name = "";
-    const apellido = "";
-    const perro = null;
-
-    function constructor(name, apellido){
-        this.name = name;
-        this.apellido = apellido;
-    }
-
-    function correr(){...}
-    function adoptarPerro(perro){
-        this.perro = perro;
-    }
-}
-
-const perroDeCaro = new Perro("pepito")
-const perroDeFau = new Perro("guille")
-
-const persona1 = new Persona("caro", "henderson");
-const persona2 = new Persona("fau", "sanchez");
-
-persona2.correr()
-
-persona1.adoptarPerro(perroDeCaro)*/
