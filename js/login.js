@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         const password = urlParams.get('password')
         if (username == "admin" && password == "1234") {
             window.location="/index.html" //el navegador te manda a otra url 
-            setCookie("isLoggedIn", "1")
+            setCookie("isLoggedIn", "1") //da el nombre y valor de la cookie a la funcion
         } else {
             alert("Credenciales incorrectas");
         }    
@@ -18,7 +18,10 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 var setCookie = function(name, value) {
     document.cookie = name+'='+value+'; expires=Fri, 31 Dec 2020 23:59:59 GMT';
-}
+} //Coloca la cookie y pone la fecha en que expira
+
+
+//EXPLICAR DESPUES
 
 //window es una variable del navegador que te da herramientas para manejarlo
 /*
