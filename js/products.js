@@ -1,6 +1,7 @@
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
 const ORDER_BY_PROD_COST = "Cost.";
+const ORDER_BY_SOLD_COUNT = "Sold.";
 var currentProductsArray = [];
 var currentSortCriteria = undefined;
 var minCount = undefined;
@@ -25,12 +26,20 @@ function sortProducts(criteria, array) {
             let aCost = parseInt(a.cost);
             let bCost = parseInt(b.cost);
 
-            if (aCost > bCost) { return -1; }
-            if (aCost < bCost) { return 1; }
+            if (aCost < bCost) { return -1; }
+            if (aCost > bCost) { return 1; }
+            return 0;
+        });
+    } else if (criteria === ORDER_BY_SOLD_COUNT) {
+        result = array.sort(function (a, b) {
+            let aSold = parseInt(a.soldCount);
+            let bSold = parseInt(b.soldCount);
+
+            if (aSold > bSold) { return -1; }
+            if (aSold < bSold) { return 1; }
             return 0;
         });
     }
-
     return result;
 }
 
@@ -58,7 +67,10 @@ function showProductsList() {
                             <h4 class="mb-1">`+ product.name + `</h4>
                             <small class="text-muted">` + `<b>`+ formatNumber(product.cost) + ` ` + product.currency + `</b>`+ `</small>
                         </div>
+                        <div class="d-flex w-100 justify-content-between">
                         <p class="mb-1">` + product.description + `</p>
+                        <small class="text-muted" style:"text-align:right;">` + formatNumber(product.soldCount) + ` vendidos` + `</small>
+                        </div> 
                     </div>
                 </div>
             </a>
@@ -103,6 +115,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
     document.getElementById("sortByCost").addEventListener("click", function () {
         sortAndShowProducts(ORDER_BY_PROD_COST);
     });
+    
+    document.getElementById("sortBySold").addEventListener("click", function () {
+        sortAndShowProducts(ORDER_BY_SOLD_COUNT);
+    });
 
     document.getElementById("clearRangeFilter").addEventListener("click", function () {
         document.getElementById("rangeFilterCountMin").value = "";
@@ -115,8 +131,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
 
     document.getElementById("rangeFilterCount").addEventListener("click", function () {
-        //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
-        //de productos por categoría.
+        //Obtengo el mínimo y máximo de los intervalos para filtrar por precio
+        //de productos.
         minCount = document.getElementById("rangeFilterCountMin").value;
         maxCount = document.getElementById("rangeFilterCountMax").value;
 
