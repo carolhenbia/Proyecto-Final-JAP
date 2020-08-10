@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         const username = urlParams.get('nombreUsuario');//al objeto le pedis el usuario
         const password = urlParams.get('password')
         if (username == "admin" && password == "1234") {
-            window.location="index.html" //el navegador te manda a otra url 
+            window.location.href="index.html" //el navegador te manda a otra url 
             setCookie("isLoggedIn", "1") //da el nombre y valor de la cookie a la funcion
         } else {
             alert("Credenciales incorrectas");
