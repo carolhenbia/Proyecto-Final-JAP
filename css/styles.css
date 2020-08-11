@@ -181,10 +181,10 @@ en una carpeta antes de esa. */
 
 .titulo-login {
   font-family: 'Raleway';
-  font-size: 20px;
+  font-size: 2.8vh;
   text-transform: uppercase;
   text-align: center;
-  padding: 20px;
+  padding: 5em;
   justify-content: center;
   align-content: center;
   color: #3f3f3f;
@@ -192,7 +192,7 @@ en una carpeta antes de esa. */
 
 .fieldset {
   font-family:'Raleway';
-  font-size: 15px;
+  font-size: 1em;
   padding: 15px;
   justify-content: center;
   align-content: center;
@@ -204,12 +204,12 @@ en una carpeta antes de esa. */
     flex-wrap: wrap;
     align-items: center;
     width: 100%;
-    height: 70px;
+    height: 100%;
     position: relative;
     border: 1px solid #e6e6e6;
     border-radius: 20px;
     margin-bottom: 13px;
-    padding: 10px;
+    padding: 1em;
     justify-content: center;
     align-content: center;
 }
@@ -233,11 +233,11 @@ en una carpeta antes de esa. */
   flex-wrap: wrap;
   align-items: center;
   width: 100%;
-  height: 70px;
+  height: 100%;
   position: relative;
   border-radius: 20px;
-  margin-bottom: 13px;
-  padding: 10px;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
   justify-content: center;
   align-content: center;
   background-color: #e72a79;
@@ -251,16 +251,26 @@ en una carpeta antes de esa. */
   background: #e72a79;
   font-size: 18px;
   color: white;
-  line-height: 1.2;
-  padding: 0 26px;
+  line-height: 0.5em;
+  padding: 1em;
   border:0;
   justify-content: center;
   align-content: center;
   outline: none !important; 
 }
 
+.caja-boton:hover {
+  background-color: #dd2f56;
+  transition: 0.4s;
+}
+
+.boton-login:hover {
+  background-color:#dd2f56;
+  transition: 0.4s;
+}
+
 .recordame {
-  margin-bottom: 10px;
+  margin-bottom: 1em;
   color: #3f3f3f;
 }
 
@@ -277,16 +287,15 @@ a:hover.link-olvidaste-contraseña {
 }
 
 .logo-ceibal-login {
-  justify-content: center;
-  align-content: center;
-  margin-left: 50px;
+  justify-content: center!important;
+  align-content: center!important;
   padding: 8px;
   margin-top: 5px;
+  margin-left: 3vh;
 }
 
 .logo-ceibal-login img {
-  width: 160px;
-  height: 43px;
+  height: 8vh;
 }
 
 
