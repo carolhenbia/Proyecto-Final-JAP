@@ -156,9 +156,9 @@ Los valores negativos colocan las combra a la izquierda de el elemento.
 Los valores negativos colocan la sombra por encima del elemento. */
 
 .container-login {
-  animation: der-a-izq 3s; 
+  /* animation: der-a-izq 3s;  */
   background-color: white;
-  width:50%;
+  width: 40%;
   height:100%;
   border-bottom-left-radius: 20px;
   border-top-left-radius: 20px;
@@ -167,8 +167,9 @@ Los valores negativos colocan la sombra por encima del elemento. */
   display: grid;
 }
 .container-login-2 { 
+  animation: der-a-izq 3s;
   background-position: right;
-  width: 70%;
+  width: 60%;
   height: 100%;
   background-image: url("../img/fondo-login.png"); 
   border-top-right-radius: 20px;
@@ -176,6 +177,8 @@ Los valores negativos colocan la sombra por encima del elemento. */
   align-content: center;
   justify-content: center;
   display: flex;
+  background-repeat: no-repeat;
+  background-size: cover;
 } /* Dos puntos antes significa que busca en la carpeta anterior, un punto en la misma carpeta.*/
 /*Eje: ahora esta en la carpeta CSS, si pones un punto busca en la carpeta de CSS, si pones dos, busca
 en una carpeta antes de esa. */
@@ -192,7 +195,7 @@ en una carpeta antes de esa. */
 }
 
 .fieldset {
-  animation: der-a-izq 3s; 
+  /* animation: der-a-izq 3s;  */
   font-family:'Raleway';
   /* font-size: 1em; */
   padding: 5px;
