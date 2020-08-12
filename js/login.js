@@ -26,3 +26,4 @@ var setCookie = function(name, value) {
 /* function onSignIn(googleUser) {
     window.location.href = "index.html";
 } */
+
