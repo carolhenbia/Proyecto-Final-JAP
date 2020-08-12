@@ -23,6 +23,6 @@ var setCookie = function(name, value) {
 
 //window es una variable del navegador que te da herramientas para manejarlo
 
-function onSignIn(googleUser) {
-    window.location.href = "index.html"
-  }
+/* function onSignIn(googleUser) {
+    window.location.href = "index.html";
+} */
