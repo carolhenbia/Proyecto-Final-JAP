@@ -1,7 +1,7 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function(e){
+/* document.addEventListener("DOMContentLoaded", function(e){
     const queryString = window.location.search; //me da lo que esta del signo de pregunta en adelante
     if(queryString !== "") {
         const urlParams = new URLSearchParams(queryString); //lo parsea a objeto 
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
 var setCookie = function(name, value) {
     document.cookie = name+'='+value+'; expires=Fri, 31 Dec 2020 23:59:59 GMT';
-} //Coloca la cookie y pone la fecha en que expira
+} */ //Coloca la cookie y pone la fecha en que expira
 
 //window es una variable del navegador que te da herramientas para manejarlo
 
