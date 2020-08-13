@@ -15,7 +15,7 @@
 });
  */
 
- const form = document.getElementById("login");
+ /* const form = document.getElementById("login");
     const username = document.getElementById("nombreUsuario");
     const password = document.getElementById("password");
     form.addEventListener("submit", function(e){
@@ -31,4 +31,4 @@
         localStorage.setItem("password", users.password);
         location.href= "index.html";
 });
-
+ */
