@@ -18,8 +18,8 @@
 });
 
 var setCookie = function(name, value) {
-    document.cookie = name+'='+value+'; expires=Fri, 31 Dec 2020 23:59:59 GMT'; */
-}  //Coloca la cookie y pone la fecha en que expira 
+    document.cookie = name+'='+value+'; expires=Fri, 31 Dec 2020 23:59:59 GMT'; } */
+/* //Coloca la cookie y pone la fecha en que expira 
 
 //window es una variable del navegador que te da herramientas para manejarlo
 
