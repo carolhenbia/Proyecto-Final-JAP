@@ -33,7 +33,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: rgb(248, 242, 242);
+      background-color: rgb(245, 235, 235);
     }
 
     .signin {
@@ -50,8 +50,6 @@
   <form id="login" autocomplete="on">
     <fieldset class="fieldset">
       <span class="titulo-login">Iniciar Sesión</span>
-    </fieldset>
-    <fieldset class="fieldset">
       <div class="caja-usuario-contraseña">
         <label for="nombreUsuario"></label>
         <input type="text" id="nombreUsuario" name="nombreUsuario" placeholder="Usuario" class="usuario-contraseña">
@@ -60,8 +58,6 @@
       <label for="contraseña"></label>
       <input type="password" id="password" name="password" placeholder="Contraseña" required class="usuario-contraseña">
      </div>
-    </fieldset>
-    <fieldset class="fieldset">
       <div class="recordame">
         <label for="recordame">Recordame</label>
         <input type="checkbox" id="recordame" name="recordame" checked="checked">
@@ -69,19 +65,16 @@
       <div class="olvidaste">
         <a href="#" class="link-olvidaste-contraseña">¿Olvidaste tu contraseña?</a>
       </div>
-    </fieldset class="fieldset">
-    <fieldset class="fieldset">
       <div class="caja-boton">
         <button type="submit" id="boton-ingresar" class="boton-login">Ingresar</button>
       </div>
     </fieldset>
-    <fieldset class="fieldset"> 
       <div class="logo-ceibal-login">
         <img src="./img/logoEcommerce.png" alt="logo-ceibal">
       </div> 
-    </fieldset>
+      <p class="recordame"> O ingresá por:</p>
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
   </form>
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
 </div>
 <div class="container-login-2">
 </div>

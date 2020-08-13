@@ -185,7 +185,7 @@ en una carpeta antes de esa. */
 
 .titulo-login {
   font-family: 'Raleway';
-  font-size: 2vh;
+  font-size: 2.5vh;
   text-transform: uppercase;
   text-align: center;
   padding: 5em;
@@ -198,7 +198,7 @@ en una carpeta antes de esa. */
   /* animation: der-a-izq 3s;  */
   font-family:'Raleway';
   /* font-size: 1em; */
-  padding: 5px;
+  padding: 0.2em;
   justify-content: center;
   align-content: center;
   text-align: center;
@@ -217,13 +217,14 @@ en una carpeta antes de esa. */
     padding: 1em;
     justify-content: center;
     align-content: center;
+    margin-top: 1em;
 }
 
 .usuario-contraseña{
   display: block;
   width: 100%;
   background: transparent;
-  font-size: 18px;
+  font-size: 2vh;
   color: #555555;
   line-height: 1.2;
   padding: 0 26px;
@@ -254,10 +255,10 @@ en una carpeta antes de esa. */
   display: block;
   width: 100%;
   background: #e72a79;
-  font-size: 18px;
+  font-size: 2vh;
   color: white;
   line-height: 0.5em;
-  padding: 1em;
+  padding: 0.8em;
   border:0;
   justify-content: center;
   align-content: center;
@@ -275,12 +276,16 @@ en una carpeta antes de esa. */
 }
 
 .recordame {
-  margin-bottom: 1em;
+  margin-bottom: 0.1em;
   color: #3f3f3f;
+  font-size: 2vh;
+  font-family:'Raleway';
+  text-align: center;
 }
 
 .olvidaste {
-  margin-bottom: 20px;
+  margin-bottom: 1em;
+  font-size: 2vh;
 }
 
 a:link.link-olvidaste-contraseña {
@@ -294,13 +299,13 @@ a:hover.link-olvidaste-contraseña {
 .logo-ceibal-login {
   justify-content: center!important;
   align-content: center!important;
-  padding: 8px;
-  margin-top: 5px;
-  margin-left: 3vh;
+  font-family:'Raleway';
+  padding: 0.2em;
+  text-align: center;
 }
 
 .logo-ceibal-login img {
-  height: 8vh;
+  height: 7vh;
 }
 
 @keyframes der-a-izq {
@@ -314,5 +319,28 @@ a:hover.link-olvidaste-contraseña {
     margin-left: 0%;
   }
 }
+
+.g-signin2 .abcRioButton {
+  border-radius:10px;
+}
+
+.g-signin2 .abcRioButton:hover {
+  -webkit-box-shadow: 0 0 3px 3px #f167a1;
+  box-shadow: 0 0 3px 3px #f167a1; 
+}
+
+.g-signin2 {
+  justify-content: center!important;
+  align-content: center!important;
+  padding: 1em;
+  display: flex;
+}
+
+.g-signin2 .abcRioButtonContents {
+  font-family: "Raleway" !important;
+}
+
+
+
 
 /* input[type="text"] {}  */
