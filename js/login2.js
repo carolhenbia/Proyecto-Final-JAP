@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function (e) {
+/* document.addEventListener("DOMContentLoaded", function (e) {
     const queryString = window.location.search; //me da lo que esta del signo de pregunta en adelante
     if (queryString !== "") {
         const urlParams = new URLSearchParams(queryString); //lo parsea a objeto 
@@ -13,3 +13,22 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
     }
 });
+ */
+
+ const form = document.getElementById("login");
+    const username = document.getElementById("nombreUsuario");
+    const password = document.getElementById("password");
+    form.addEventListener("submit", function(e){
+        e.preventDefault();
+
+        let users= 
+        {
+            nombreUsuario: username.value,
+            password: password.value
+
+        };
+        localStorage.setItem("nombreUsuario", users.username)
+        localStorage.setItem("password", users.password);
+        location.href= "index.html";
+});
+

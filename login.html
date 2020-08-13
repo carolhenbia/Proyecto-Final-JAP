@@ -88,5 +88,10 @@
 </div>
   <script src="js/init.js"></script>
   <script src="js/login2.js"></script>
+  <script>
+    if (localStorage.getItem("nombreUsuario") === null || localStorage.getItem("password") === null) {
+      location.href= "login.html";
+    }
+</script>
 </body>
 </html>

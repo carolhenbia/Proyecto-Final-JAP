@@ -17,8 +17,3 @@ document.addEventListener("DOMContentLoaded", function(e){
         window.location.href = "login.html" //lo manda al login 
     }
 });
-var getCookie = function (name) { //funcion pre hecha que parsea los datos de cookie
-	var value = "; " + document.cookie;
-	var parts = value.split("; " + name + "=");
-	if (parts.length == 2) return parts.pop().split(";").shift();
-};
