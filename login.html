@@ -11,7 +11,8 @@
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script>
     function onSignIn(googleUser) {
-    window.localStorage.setItem("isLoggedIn");
+    window.localStorage.setItem("isLoggedIn", "1");
+    console.log("hola")
     window.location.href = "index.html";
     }
   </script>
