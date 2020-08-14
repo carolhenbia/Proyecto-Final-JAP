@@ -18,16 +18,9 @@ document.addEventListener("DOMContentLoaded", function(e){
     }
 });
 
-
-/*var setCookie = function(name, value) {
-    document.cookie = name+'='+value+'; expires=Fri, 31 Dec 2020 23:59:59 GMT'; } */
-//Coloca la cookie y pone la fecha en que expira 
-
-//window es una variable del navegador que te da herramientas para manejarlo
-
-function onSignIn(googleUser) {
+/* function onSignIn(googleUser) {
     console.log(googleUser)
     window.localStorage.setItem("isLoggedIn", googleUser) //setItem es una funcion publica recibe parametro valor y guarda ahi
     window.location.href = "index.html";
 }
-
+ */ //LO PUSE EN COMENTARIOS PORQUE EL LOGOUT DE GOOGLE NO SALE, (LO QUE VIMOS EN CLASE)
