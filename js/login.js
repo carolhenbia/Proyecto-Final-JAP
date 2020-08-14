@@ -2,10 +2,7 @@
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () { //el then hace que despues de terminar lo anterior, hace lo siguiente
-        console.log('User signed out.');
-      });
+    
     const queryString = window.location.search; //me da lo que esta del signo de pregunta en adelante
     if(queryString !== "") {
         const urlParams = new URLSearchParams(queryString); //lo parsea a objeto 

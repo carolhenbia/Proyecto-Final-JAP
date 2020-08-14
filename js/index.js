@@ -17,3 +17,19 @@ document.addEventListener("DOMContentLoaded", function(e){
         window.location.href = "login.html" //lo manda al login 
     }
 });
+function init() {
+    gapi.load('auth2', function() {
+      /* Ready. Make a call to gapi.auth2.init or some other API */
+      var auth2 = gapi.auth2.getAuthInstance();
+      console.log(gapi);
+    auth2.signOut().then(function () { //el then hace que despues de terminar lo anterior, hace lo siguiente
+        console.log('User signed out.');
+      });
+    });
+  }
+function logOut(){
+    
+    window.localStorage.removeItem("isLoggedIn");
+    window.location.href = "login.html" //lo manda al login 
+
+}   
