@@ -1,6 +1,7 @@
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
-const ORDER_BY_PROD_COST = "Cost.";
+const ORDER_BY_ASC_COST = "$<.";
+const ORDER_BY_DESC_COST = "$>.";
 const ORDER_BY_SOLD_COUNT = "Sold.";
 var currentProductsArray = [];
 var currentSortCriteria = undefined;
@@ -21,7 +22,7 @@ function sortProducts(criteria, array) {
             if (a.name < b.name) { return 1; }
             return 0;
         });
-    } else if (criteria === ORDER_BY_PROD_COST) {
+    } else if (criteria === ORDER_BY_ASC_COST) {
         result = array.sort(function (a, b) {
             let aCost = parseInt(a.cost);
             let bCost = parseInt(b.cost);
@@ -30,6 +31,15 @@ function sortProducts(criteria, array) {
             if (aCost > bCost) { return 1; }
             return 0;
         });
+    } else if (criteria === ORDER_BY_DESC_COST) {
+        result = array.sort(function (a, b) {
+            let aCost = parseInt(a.cost);
+            let bCost = parseInt(b.cost);
+
+            if (aCost > bCost) { return -1; }
+            if (aCost < bCost) { return 1; }
+            return 0;
+        });       
     } else if (criteria === ORDER_BY_SOLD_COUNT) {
         result = array.sort(function (a, b) {
             let aSold = parseInt(a.soldCount);
@@ -112,8 +122,12 @@ document.addEventListener("DOMContentLoaded", function (e) {
         sortAndShowProducts(ORDER_DESC_BY_NAME);
     });
 
-    document.getElementById("sortByCost").addEventListener("click", function () {
-        sortAndShowProducts(ORDER_BY_PROD_COST);
+    document.getElementById("costAsc").addEventListener("click", function () {
+        sortAndShowProducts(ORDER_BY_ASC_COST);
+    });
+
+    document.getElementById("costDesc").addEventListener("click", function () {
+        sortAndShowProducts(ORDER_BY_DESC_COST);
     });
     
     document.getElementById("sortBySold").addEventListener("click", function () {
@@ -152,5 +166,12 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
         showProductsList();
     });
+});
+
+document.addEventListener("DOMContentLoaded", function (e) {
+    var isLoggedIn = window.localStorage.getItem("isLoggedIn") //agarra el item
+    if (isLoggedIn == undefined) { //si ve que el loggedin es igual a undefined 
+        window.location.href = "login.html" //lo manda al login 
+    } else {document.getElementById("usuario").innerHTML = `Usuario: ${isLoggedIn}`;}
 });
 

@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     var isLoggedIn = window.localStorage.getItem("isLoggedIn") //agarra el item
     if (isLoggedIn == undefined) { //si ve que el loggedin es igual a undefined 
         window.location.href = "login.html" //lo manda al login 
-    }
+    } else {document.getElementById("usuario").innerHTML = `Usuario: ${isLoggedIn}`;}
 });
 
 /* function onLoad() {
@@ -33,3 +33,5 @@ function logOut() {
     window.location.href = "login.html" //lo manda al login 
 
 }   
+
+document.getElementById("usuario").innerHTML = window.localStorage.getItem("isLoggedIn", username);
