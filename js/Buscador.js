@@ -5,9 +5,17 @@ const resultado = document.getElementById("resultado");
 var productos = []
 
 getJSONData(PRODUCTS_URL).then(function(result){ 
-    console.log(result)
-    productos = result.data
-}) 
+    if (result.status === "ok") {
+        console.log(result)
+        productos = result.data;
+    }   
+}); 
+
+/* getJSONData(PRODUCTS_URL).then(function (resultObj) {
+    if (resultObj.status === "ok") {
+        sortAndShowProducts(ORDER_ASC_BY_NAME, resultObj.data);
+    }
+}); */
 
 /*con el getJsonData busca el json. El then significa que cuando traiga el json haga lo siguiente
 después de eso hace la función result, que trae el resultado
