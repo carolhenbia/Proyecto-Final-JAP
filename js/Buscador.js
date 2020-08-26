@@ -72,8 +72,9 @@ const filtrar = ()=>{
 }
 
 
-button.addEventListener('click', filtrar)
+
 buscador.addEventListener('keyup', filtrar)
+button.addEventListener('click', filtrar)
 filtrar(); //para que ya aparezcan los productos
 
 

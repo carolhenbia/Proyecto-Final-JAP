@@ -53,9 +53,12 @@
           </div>
           <div class="row justify-content-end">
             <div class="col-md-6">
-              <div class="col">
-                <input class="form-control" type="search" id="product-search" size="30" name="q">
-                <button class="btn btn-light btn-block" id="search-button" onclick="filtrar()">Buscar</button>
+              <div class="form-inline">
+               <!--  <input class="form-control" type="search" id="product-search" size="30" name="q" placeholder="Busca el producto que deseas">
+                <button class="btn btn-light btn-block" id="search-button" onclick="filtrar()">Buscar</button> -->
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input class="form-control form-control-sm ml-3 w-75" type="search" placeholder="Busca el producto que deseas"
+                  aria-label="Search" id="product-search" name="q">
                 <ul id="resultado"></ul>
               </div>
             </div>
