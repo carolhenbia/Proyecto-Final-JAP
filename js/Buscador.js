@@ -4,12 +4,15 @@ const resultado = document.getElementById("resultado");
 
 var productos = []
 
+document.addEventListener("DOMContentLoaded", function(e){
 getJSONData(PRODUCTS_URL).then(function(result){ 
     if (result.status === "ok") {
         console.log(result)
         productos = result.data;
     }   
-}); 
+});
+});
+ 
 
 
 /*con el getJsonData busca el json. El then significa que cuando traiga el json haga lo siguiente
@@ -69,17 +72,6 @@ const filtrar = ()=>{
         document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
     }
 }
-
-    /* resultadosBuscador(); */
-    /* for(let producto of results){
-        resultado.innerHTML += `<li>${producto.name}</li>`
-    } */
-    
-    /* if(resultado.innerHTML === "") {
-        resultado.innerHTML += `<li>Producto no encontrado.</li>` */
-
-
-
 
 button.addEventListener('click', filtrar)
 buscador.addEventListener('keyup', filtrar)
