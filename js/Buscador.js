@@ -66,9 +66,9 @@ const filtrar = ()=>{
             </a>
             `
         }
-
-        document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
-    }
+    } if (results.length == 0)
+    {document.getElementById("prod-list-container").innerHTML = "No se encuentra el producto."}
+    else {document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;}
 }
 
 
