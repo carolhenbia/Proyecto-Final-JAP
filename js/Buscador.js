@@ -16,11 +16,10 @@ getJSONData(PRODUCTS_URL).then(function(result){
 /*con el getJsonData busca el json. El then significa que cuando traiga el json haga lo siguiente
 después de eso hace la función result, que trae el resultado
 en el console log hay que fijarse qué es ese resultado
-y despues pedirle que te traiga lo que quieras de ese resultado
+y despues pedirle que te traiga lo que quieras de ese resultado*/
 
 
-/* 
-console.log(productos) */
+/* console.log(productos) */
 
 const filtrar = ()=>{
     /* console.log(buscador.value); */
