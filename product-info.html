@@ -170,17 +170,8 @@
   </div>
    <!-- Classic tabs -->
 <div class="classic-tabs border rounded px-4 pt-1">
-
-  <ul class="nav tabs-primary nav-justified" id="advancedTab" role="tablist">
-     <li class="nav-item">
-      <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews (1)</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Information</a>
-    </li>
-  </ul>
-  <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-    <h5><span id="tituloComentarios"></span></h5>
+ <div class="tab-pane" id="reviews" id="advancedTab" role="tablist">
+    <h5><span id="tituloComentarios">Opiniones del Chevrolet Onix</span></h5>
     <div class="media mt-3 mb-4">
       <img class="d-flex mr-3 z-depth-1" src="/img/thumbComentario.png" width="62">
       <div class="media-body">
@@ -257,10 +248,10 @@
         <p class="mb-0" id="cuartoComentario"></p>
       </div>
     </div>
-    <hr>
-    <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
-      <h5 class="mt-4">Add a review</h5>
-      <p>Your email address will not be published.</p>
+  </div>
+  <hr>
+    <div class="tab-pane" id="info" id="advancedTab" role="tablist" aria-labelledby="info-tab">
+      <h5 class="mt-4">Agrega tu opinión</h5>
       <div class="my-3">
         <ul class="rating mb-0">
           <li>
@@ -291,27 +282,23 @@
         </ul>
       </div>
       <div>
-        <!-- Your review -->
         <div class="md-form md-outline">
           <textarea id="form76" class="md-textarea form-control pr-6" rows="4"></textarea>
-          <label for="form76">Your review</label>
+          <label for="form76">Tu opinión o comentario</label>
         </div>
-        <!-- Name -->
         <div class="md-form md-outline">
           <input type="text" id="form75" class="form-control pr-6">
-          <label for="form75">Name</label>
+          <label for="form75">Nombre</label>
         </div>
-        <!-- Email -->
         <div class="md-form md-outline">
           <input type="email" id="form77" class="form-control pr-6">
           <label for="form77">Email</label>
         </div>
         <div class="text-right pb-2">
-          <button type="button" class="btn btn-primary">Add a review</button>
+          <button type="button" class="btn btn-primary">Agregar opinión</button>
         </div>
       </div>
     </div>
-  </div>
     </div>
 </div>
 <!-- Classic tabs -->
@@ -341,7 +328,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <!-- <script src="js/product-info.js"></script> -->
-  <script src="js/product-info.js"></script>
+  <script src="js/product-info-2.js"></script>
 </body>
 
 </html>
