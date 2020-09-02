@@ -76,7 +76,7 @@
             <div class="row">
               <div class="col-3">
                 <div class="view overlay rounded z-depth-1 gallery-item">
-                  <img id="imagen2Producto" class="img-fluid">
+                  <img id="imagen2Producto" class="img-fluid" onmouseover="cambiarFoto()">
                   <div class="mask rgba-white-slight"></div>
                 </div>
               </div>
@@ -127,9 +127,7 @@
         </li>
       </ul> -->
       <p><span class="mr-1"><strong id="precioProducto" style="font-size: x-large;"></strong></span></p>
-      <p class="pt-1" id="descripcionProducto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, sapiente illo. Sit
-        error voluptas repellat rerum quidem, soluta enim perferendis voluptates laboriosam. Distinctio,
-        officia quis dolore quos sapiente tempore alias.</p>
+      <p class="pt-1" id="descripcionProducto"></p>
       <div class="table-responsive">
         <table class="table table-sm table-borderless mb-0">
           <tbody>
@@ -170,10 +168,158 @@
           class="fas fa-shopping-cart pr-2"></i>Añadir al carrito</button>
     </div>
   </div>
+   <!-- Classic tabs -->
+<div class="classic-tabs border rounded px-4 pt-1">
 
-</section>
+  <ul class="nav tabs-primary nav-justified" id="advancedTab" role="tablist">
+     <li class="nav-item">
+      <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews (1)</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="info-tab" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Information</a>
+    </li>
+  </ul>
+  <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+    <h5><span id="tituloComentarios"></span></h5>
+    <div class="media mt-3 mb-4">
+      <img class="d-flex mr-3 z-depth-1" src="/img/thumbComentario.png" width="62">
+      <div class="media-body">
+        <div class="d-sm-flex justify-content-between">
+          <p class="mt-1 mb-2">
+            <strong id="primerUsuario"></strong>
+            <span>– </span><span id="primerFecha"></span>
+          </p>
+          <ul class="rating mb-sm-0">
+              <i class="fas fa-star fa-sm text-primary"></i>
+              <i class="fas fa-star fa-sm text-primary"></i>
+              <i class="fas fa-star fa-sm text-primary"></i>
+              <i class="far fa-star fa-sm text-primary"></i>
+              <i class="far fa-star fa-sm text-primary"></i>
+          </ul>
+        </div>
+        <p class="mb-0" id="primerComentario"></p>
+      </div>
     </div>
+    <div class="media mt-3 mb-4">
+      <img class="d-flex mr-3 z-depth-1" src="/img/thumbComentario.png" width="62">
+      <div class="media-body">
+        <div class="d-sm-flex justify-content-between">
+          <p class="mt-1 mb-2">
+            <strong id="segundoUsuario"></strong>
+            <span>– </span><span id="segundoFecha"></span>
+          </p>
+          <ul class="rating mb-sm-0">
+              <i class="fas fa-star fa-sm text-primary"></i>
+              <i class="fas fa-star fa-sm text-primary"></i>
+              <i class="fas fa-star fa-sm text-primary"></i>
+              <i class="far fa-star fa-sm text-primary"></i>
+              <i class="far fa-star fa-sm text-primary"></i>
+          </ul>
+        </div>
+        <p class="mb-0" id="segundoComentario"></p>
+      </div>
+    </div>
+    <div class="media mt-3 mb-4">
+      <img class="d-flex mr-3 z-depth-1" src="/img/thumbComentario.png" width="62">
+      <div class="media-body">
+        <div class="d-sm-flex justify-content-between">
+          <p class="mt-1 mb-2">
+            <strong id="tercerUsuario"></strong>
+            <span>– </span><span id="tercerFecha"></span>
+          </p>
+          <ul class="rating mb-sm-0">
+              <i class="fas fa-star fa-sm text-primary"></i>
+              <i class="fas fa-star fa-sm text-primary"></i>
+              <i class="fas fa-star fa-sm text-primary"></i>
+              <i class="far fa-star fa-sm text-primary"></i>
+              <i class="far fa-star fa-sm text-primary"></i>
+          </ul>
+        </div>
+        <p class="mb-0" id="tercerComentario"></p>
+      </div>
+    </div>
+    <div class="media mt-3 mb-4">
+      <img class="d-flex mr-3 z-depth-1" src="/img/thumbComentario.png" width="62">
+      <div class="media-body">
+        <div class="d-sm-flex justify-content-between">
+          <p class="mt-1 mb-2">
+            <strong id="cuartoUsuario"></strong>
+            <span>– </span><span id="cuartoFecha"></span>
+          </p>
+          <ul class="rating mb-sm-0">
+              <i class="fas fa-star fa-sm text-primary"></i>
+              <i class="fas fa-star fa-sm text-primary"></i>
+              <i class="fas fa-star fa-sm text-primary"></i>
+              <i class="far fa-star fa-sm text-primary"></i>
+              <i class="far fa-star fa-sm text-primary"></i>
+          </ul>
+        </div>
+        <p class="mb-0" id="cuartoComentario"></p>
+      </div>
+    </div>
+    <hr>
+    <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+      <h5 class="mt-4">Add a review</h5>
+      <p>Your email address will not be published.</p>
+      <div class="my-3">
+        <ul class="rating mb-0">
+          <li>
+            <a href="#!">
+              <i class="fas fa-star fa-sm text-primary"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#!">
+              <i class="fas fa-star fa-sm text-primary"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#!">
+              <i class="fas fa-star fa-sm text-primary"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#!">
+              <i class="fas fa-star fa-sm text-primary"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#!">
+              <i class="far fa-star fa-sm text-primary"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <!-- Your review -->
+        <div class="md-form md-outline">
+          <textarea id="form76" class="md-textarea form-control pr-6" rows="4"></textarea>
+          <label for="form76">Your review</label>
+        </div>
+        <!-- Name -->
+        <div class="md-form md-outline">
+          <input type="text" id="form75" class="form-control pr-6">
+          <label for="form75">Name</label>
+        </div>
+        <!-- Email -->
+        <div class="md-form md-outline">
+          <input type="email" id="form77" class="form-control pr-6">
+          <label for="form77">Email</label>
+        </div>
+        <div class="text-right pb-2">
+          <button type="button" class="btn btn-primary">Add a review</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+</div>
+<!-- Classic tabs -->
+</section>
+    </div>  
+   
   </main>
+  <div id="PRUEBA"></div>
   <footer class="text-muted">
     <div class="container">
       <p class="float-right">
@@ -194,6 +340,7 @@
   <script src="js/jquery-3.4.1.min.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
+  <!-- <script src="js/product-info.js"></script> -->
   <script src="js/product-info.js"></script>
 </body>
 

@@ -9,7 +9,7 @@ function formatNumber(num) {
 document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(PRODUCT_INFO_URL).then(function (result) {
         if (result.status === "ok") {
-            function llamarDataProductos(){
+            function llamarDataProductos() {
                 productInfo = result.data;
                 productName = result.data.name;
                 productDesc = result.data.description;
@@ -30,11 +30,54 @@ document.addEventListener("DOMContentLoaded", function (e) {
             document.getElementById("imagen2Producto").src = productImages[1];
             document.getElementById("imagen3Producto").src = productImages[2];
             document.getElementById("imagen4Producto").src = productImages[3];
-            document.getElementById("imagen5Producto").src = productImages[4]; 
+            document.getElementById("imagen5Producto").src = productImages[4];
+            document.getElementById("tituloComentarios").innerHTML = `Opiniones del auto ${productName}`;
         }
     });
 });
 
+
+document.addEventListener("DOMContentLoaded", function (e) {
+    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (result) {
+        if (result.status === "ok") {
+            /*    console.log(result) */
+            function llamarDataComentarios() {
+                productComments = result.data;
+                primerComment = productComments[0];
+                segundoComment = productComments[1];
+                tercerComment = productComments[2];
+                cuartoComment = productComments[3];
+            }
+            llamarDataComentarios();
+
+            document.getElementById("primerComentario").innerHTML = primerComment.description;
+            document.getElementById("primerUsuario").innerHTML = `@ ${primerComment.user}`;
+            document.getElementById("primerFecha").innerHTML = primerComment.dateTime;
+            /* document.getElementById("").innerHTML = primerComment.score; */
+
+            document.getElementById("segundoComentario").innerHTML = segundoComment.description;
+            document.getElementById("segundoUsuario").innerHTML = `@ ${segundoComment.user}`;
+            document.getElementById("segundoFecha").innerHTML = segundoComment.dateTime;
+            /* document.getElementById("").innerHTML = segundoComment.score; */
+
+            document.getElementById("tercerComentario").innerHTML = tercerComment.description;
+            document.getElementById("tercerUsuario").innerHTML = `@ ${tercerComment.user}`;
+            document.getElementById("tercerFecha").innerHTML = tercerComment.dateTime;
+            /* document.getElementById("").innerHTML = segundoComment.score; */
+
+            document.getElementById("cuartoComentario").innerHTML = cuartoComment.description;
+            document.getElementById("cuartoUsuario").innerHTML = `@ ${cuartoComment.user}`;
+            document.getElementById("cuartoFecha").innerHTML = cuartoComment.dateTime;
+            /* document.getElementById("").innerHTML = segundoComment.score; */
+
+
+        }
+    });
+});
+
+/* function cambiarFoto(){
+    foto1.innerHTML = foto2;
+} */
 
 
 
@@ -51,12 +94,6 @@ document.getElementsByTagName('h1').innerHTML = productName; */
 
 
 
-getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (result) {
-    if (result.status === "ok") {
-        /*    console.log(result) */
-        productComments = result.data;
-    }
-});
 
 $(document).ready(function () {
     // MDB Lightbox Init
