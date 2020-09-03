@@ -40,9 +40,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 
 
-/* var emailComentario = document.getElementById("nombreEmail"); */
-/* var fechaActual = new Date();
-document.write(fechaActual.getDate() + "/" + (fechaActual.getMonth() +1) + "/" + fechaActual.getFullYear()); */
+var fechaActual = new Date();
+document.write(fechaActual.getFullYear() + "-" + (fechaActual.getMonth() + 1) + fechaActual.getDate() + "-" + fechaActual.getTime());
 
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -92,17 +91,14 @@ document.addEventListener("DOMContentLoaded", function (e) {
                       <i class="far fa-star fa-sm text-primary"></i>
               </div>
               <div>
-                <!-- Your review -->
                 <div class="md-form md-outline">
                   <textarea id="comentarioNuevo" class="md-textarea form-control pr-6" rows="4" placeholder="Tu opinión o comentario" maxlength="200"></textarea>
                   <label for="form76"></label>
                 </div>
-                <!-- Name -->
                 <div class="md-form md-outline">
                   <input type="text" id="comentarioNombre" class="form-control pr-6" placeholder="Nombre" maxlength="50">
                   <label for="form75"></label>
                 </div>
-                <!-- Email -->
                 <div class="md-form md-outline">
                   <input type="email" id="comentarioEmail" class="form-control pr-6" placeholder="Email">
                   <label for="form77"></label>
@@ -117,44 +113,92 @@ document.addEventListener("DOMContentLoaded", function (e) {
         </div>
             `
             document.getElementById("info").innerHTML = formularioDeComentario;
-
-            function enviarComentario() {
-                comentario = crearObjetoComentario()
-                productComments.push(comentario);
-            }
-            
-            function crearObjetoComentario() {
-                var comentarioNuevo = document.getElementById("comentarioNuevo");
-                var nombreComentario = document.getElementById("comentarioNombre");
-                var objComentarioNuevo = {
-                    score: null,
-                    description: comentarioNuevo.value,
-                    user: nombreComentario.value,
-                    dateTime: null
-                }
-                return objComentarioNuevo; 
-            } 
         }
-        
     });
 });
 
 
-/* function cambiarFoto(){
-    foto1.innerHTML = foto2;
+function enviarComentario() {
+    var comentarioNew = crearObjetoComentario();
+    productComments.push(comentarioNew);
+    var comentariosActuales = document.getElementById("reviews");
+    comentariosActuales.insertAdjacentHTML('afterend', `
+    <div class="media mt-3 mb-4">
+<img class="d-flex mr-3 z-depth-1" src="/img/thumbComentario.png" width="62">
+<div class="media-body">
+<div class="d-sm-flex justify-content-between">
+  <p class="mt-1 mb-2">
+    <strong> @${comentarioNew.user} </strong>
+    <span>– </span><span>${comentarioNew.dateTime}</span>
+  </p>
+  <ul class="rating mb-sm-0">
+      <i class="fas fa-star fa-sm text-primary"></i>
+      <i class="fas fa-star fa-sm text-primary"></i>
+      <i class="fas fa-star fa-sm text-primary"></i>
+      <i class="far fa-star fa-sm text-primary"></i>
+      <i class="far fa-star fa-sm text-primary"></i>
+  </ul>
+</div>
+<p class="mb-0">${comentarioNew.description}</p>
+</div>
+</div>
+    `)
+
+    document.getElementById("comentarioNuevo").value = "";
+    document.getElementById("comentarioNombre").value = "";
+    document.getElementById("nombreEmail").value = "";
 }
 
 
-/* document.addEventListener("DOMContentLoaded", function (e) {
-    document.getElementById("tituloProductInfo").innerHTML = productName;
-});
+function crearObjetoComentario() {
+    var comentarioNuevo = document.getElementById("comentarioNuevo");
+    var nombreComentario = document.getElementById("comentarioNombre");
+    var emailComentario = document.getElementById("nombreEmail");
+    var objComentarioNuevo = {
+        score: null,
+        description: comentarioNuevo.value,
+        user: nombreComentario.value,
+        dateTime: null
+    }
+    return objComentarioNuevo;
+}
+
+/* function borrarDatosFormulario() {
+    comentarioNuevo.value = "";
+    nombreComentario.value = "";
+    emailComentario.value = "";
+}
  */
 
 
-/* var productName = productInfo['name']
-console.log(productName)
-document.getElementsByTagName('h1').innerHTML = productName; */
 
+/* function enviarComentario() {
+    var comentarioNew = crearObjetoComentario();
+    productComments.push(comentarioNew);
+    var comentariosActuales = document.getElementById("reviews");
+    var htmlComentarioNuevo = `
+    <div class="media mt-3 mb-4">
+<img class="d-flex mr-3 z-depth-1" src="/img/thumbComentario.png" width="62">
+<div class="media-body">
+<div class="d-sm-flex justify-content-between">
+  <p class="mt-1 mb-2">
+    <strong> @${comentarioNew.user} </strong>
+    <span>– </span><span>${comentarioNew.dateTime}</span>
+  </p>
+  <ul class="rating mb-sm-0">
+      <i class="fas fa-star fa-sm text-primary"></i>
+      <i class="fas fa-star fa-sm text-primary"></i>
+      <i class="fas fa-star fa-sm text-primary"></i>
+      <i class="far fa-star fa-sm text-primary"></i>
+      <i class="far fa-star fa-sm text-primary"></i>
+  </ul>
+</div>
+<p class="mb-0">${comentarioNew.description}</p>
+</div>
+</div>
+    `
+    comentariosActuales.appendChild(htmlComentarioNuevo);
+} */
 
 
 
