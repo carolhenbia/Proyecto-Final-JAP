@@ -36,9 +36,14 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
 });
 
+document.getElementById("imagen2Producto").addEventListener("mouseover", function() {   
+    // highlight the mouseenter target
+    document.getElementById("imagen1Producto").src = "./img/prod1_1.jpg";
+    // reset the color after a short delay
+});
 
-
-
+/* Podes aplicarle una clase en particular a las imagenes y usar querySellectorAll(".clase")
+ */
 
 var fechaActual = new Date();
 document.write(fechaActual.getFullYear() + "-" + (fechaActual.getMonth() + 1) + fechaActual.getDate() + "-" + fechaActual.getTime());
@@ -52,8 +57,20 @@ document.addEventListener("DOMContentLoaded", function (e) {
             let htmlContentToAppend = ""
 
             for (let i = 0; i < productComments.length; i++) {
-                let comentario = productComments[i]; //revisa el array de resultados, producto por producto
+                let comentario = productComments[i]; 
                 console.log(comentario.user)
+
+            var estrellas = "";
+
+            for(n=0; n<comentario.score; n++){
+                estrellas += `<i class="fas fa-star fa-sm" style="color:#e72a79;"></i>`
+            }
+
+            var estrellasVacias = Math.abs(comentario.score - 5);
+
+            for(n=0; n<estrellasVacias; n++){
+                estrellas += `<i class="far fa-star fa-sm" style="color:#e72a79;"></i>`
+            }
 
                 htmlContentToAppend += `
                         <div class="media mt-3 mb-4">
@@ -65,11 +82,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         <span>– </span><span>${comentario.dateTime}</span>
                       </p>
                       <ul class="rating mb-sm-0">
-                          <i class="fas fa-star fa-sm text-primary"></i>
-                          <i class="fas fa-star fa-sm text-primary"></i>
-                          <i class="fas fa-star fa-sm text-primary"></i>
-                          <i class="far fa-star fa-sm text-primary"></i>
-                          <i class="far fa-star fa-sm text-primary"></i>
+                      ${estrellas}
                       </ul>
                     </div>
                     <p class="mb-0">${comentario.description}</p>
@@ -84,11 +97,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
             
               <h5 class="mt-4">Agrega tu opinión</h5>
               <div class="my-3">
-                      <i class="fas fa-star fa-sm text-primary"></i>
-                      <i class="fas fa-star fa-sm text-primary"></i>
-                      <i class="fas fa-star fa-sm text-primary"></i>
-                      <i class="fas fa-star fa-sm text-primary"></i>
-                      <i class="far fa-star fa-sm text-primary"></i>
+                      <i class="fas fa-star" style="color:#e72a79;"></i>
+                      <i class="fas fa-star" style="color:#e72a79;"></i>
+                      <i class="fas fa-star" style="color:#e72a79;"></i>
+                      <i class="fas fa-star" style="color:#e72a79;"></i>
+                      <i class="far fa-star" style="color:#e72a79;"></i>
               </div>
               <div>
                 <div class="md-form md-outline">
@@ -132,7 +145,7 @@ function enviarComentario() {
     <span>– </span><span>${comentarioNew.dateTime}</span>
   </p>
   <ul class="rating mb-sm-0">
-      <i class="fas fa-star fa-sm text-primary"></i>
+      <i class="fas fa-star fa-sm text-primary" ></i>
       <i class="fas fa-star fa-sm text-primary"></i>
       <i class="fas fa-star fa-sm text-primary"></i>
       <i class="far fa-star fa-sm text-primary"></i>
