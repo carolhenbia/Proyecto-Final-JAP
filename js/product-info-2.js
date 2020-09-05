@@ -36,10 +36,16 @@ document.addEventListener("DOMContentLoaded", function (e) {
   });
 });
 
-document.getElementById("imagen2Producto").addEventListener("mouseover", function () {
-  // highlight the mouseenter target
-  document.getElementById("imagen1Producto").src = "./img/prod1_1.jpg";
-  // reset the color after a short delay
+/* document.getElementById("imagen2Producto").addEventListener("mouseover", function () {
+  document.getElementById("imagen1Producto").src = this.src;
+}); */
+
+document.querySelector(".imgThumb").addEventListener("mouseover", function () {
+  document.getElementById("imagen1Producto").src = this.src;
+});
+
+document.querySelector(".imgThumb").addEventListener("mouseout", function () {
+  document.getElementById("imagen1Producto").src = productImages[0];
 });
 
 /* Podes aplicarle una clase en particular a las imagenes y usar querySellectorAll(".clase")
