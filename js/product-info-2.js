@@ -56,13 +56,10 @@ document.querySelector(".imgThumb").addEventListener("mouseout", function () {
   document.getElementById("star1").innerHTML = `<i class="fas fa-star" style="color:#e72a79;"></i>`
 }  */
 
-$('star').mouseover(function () {
-  $('star').removeClass('far fa-star');
-  $(this).addClass('fas fa-star');
-})
 
 
 document.addEventListener("DOMContentLoaded", function (e) {
+  
   getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (result) {
     if (result.status === "ok") {
       productComments = result.data;
@@ -110,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
             
               <h5 class="mt-4">Agrega tu opinión</h5>
               <div class="my-3">
-                      <i class="far fa-star" id="score1" style="color:#e72a79;" class="star"></i>
+                      <i class="far fa-star star" id="score1" style="color:#e72a79;"></i>
                       <i class="far fa-star" id="score2" style="color:#e72a79;"></i>
                       <i class="far fa-star" id="score3" style="color:#e72a79;"></i>
                       <i class="far fa-star" id="score4" style="color:#e72a79;"></i>
@@ -135,6 +132,15 @@ document.addEventListener("DOMContentLoaded", function (e) {
         </div>
             `
       document.getElementById("info").innerHTML = formularioDeComentario;
+      $('#score1').mouseover(function () {
+        $('.star').removeClass('far fa-star');
+        $('.star').addClass('fas fa-star');
+      })
+      $('.star').mouseleave(function () {
+        
+        $('.star').removeClass('fas fa-star');
+        $('.star').addClass('far fa-star');
+      })
     }
   });
 });
