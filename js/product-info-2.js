@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         productSold = result.data.soldCount;
         productCategory = result.data.category;
         productImages = result.data.images;
+        productRelated = result.data.relatedProducts;
       }
       llamarDataProductos();
       document.getElementById("tituloProducto").innerHTML = productName;
@@ -51,6 +52,14 @@ document.querySelector(".imgThumb").addEventListener("mouseout", function () {
 /* Podes aplicarle una clase en particular a las imagenes y usar querySellectorAll(".clase")
  */
 
+ /* starOVer();{
+  document.getElementById("star1").innerHTML = `<i class="fas fa-star" style="color:#e72a79;"></i>`
+}  */
+
+$('star').mouseover(function () {
+  $('star').removeClass('far fa-star');
+  $(this).addClass('fas fa-star');
+})
 
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -130,15 +139,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
   });
 });
 
-/* starOVer();{
-  document.getElementById("star1").innerHTML = `<i class="fas fa-star" style="color:#e72a79;"></i>`
-}  */
-
-$('star').mouseover(function () {
-  $('star').removeClass('far fa-star');
-  $(this).addClass('fas fa-star');
-})
-
 function enviarComentario() {
   var comentarioNew = crearObjetoComentario();
   productComments.push(comentarioNew);
@@ -200,13 +200,50 @@ var productos = [];
 document.addEventListener("DOMContentLoaded", function (e) {
   getJSONData(PRODUCTS_URL).then(function (result) {
     if (result.status === "ok") {
-      console.log(result)
       productos = result.data;
-    }
+      productRelated = productRelated.map(el => { //igual a escribir function(el){}
+        return productos[el]
+      }) 
+      //map, recorre el array y le aplica una funcion a cada elemento
+      //a la funcion le pasa el parametro de el
+      //"el" es cada elemento del array de relacionados
+      //con el productos [el], devuelve el objeto en 
+      //la posicion que indica los elementos del array de relacionados 
+     
+      let productosRelacionadosHTML = ""
+    
+      for (let i = 0; i < productRelated.length; i++) {
+        let productoRelacionado = productRelated[i];
+        console.log(productoRelacionado)
+  
+        productosRelacionadosHTML += `
+          <div class="col-md-6 col-lg-3 mb-5">
+  
+          <div class="">
+    
+            <div class="view zoom overlay z-depth-2 rounded">
+              <img class="img-fluid w-100"
+                src="${productoRelacionado.imgSrc}" alt="">
+            </div>
+    
+            <div class="pt-4">
+              <h5 id="tituloProductoRelacionado">${productoRelacionado.name}</h5>
+              <h6 id="precioProductoRelacionado">${productoRelacionado.currency} ${formatNumber(productoRelacionado.cost)}</h6>
+            </div>
+          </div>
+        </div>
+      </div>`
+        document.getElementById("productosRelacionados").innerHTML = productosRelacionadosHTML;
+      }
+    
+    
+    } 
+
+    
   });
 });
 
-console.log(productos)
+
 
 
 /* 
