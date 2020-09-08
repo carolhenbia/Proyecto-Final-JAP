@@ -340,3 +340,10 @@ a:hover.link-olvidaste-contraseña {
   font-family: "Raleway" !important;
 }
 
+.rating-box {
+  padding:5px 0px 20px 0px;
+}
+
+.rating-box .ratings .fa {
+  color:#e72a79;
+}

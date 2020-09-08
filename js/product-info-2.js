@@ -52,24 +52,22 @@ document.querySelector(".imgThumb").addEventListener("mouseout", function () {
 /* Podes aplicarle una clase en particular a las imagenes y usar querySellectorAll(".clase")
  */
 
- /* starOVer();{
-  document.getElementById("star1").innerHTML = `<i class="fas fa-star" style="color:#e72a79;"></i>`
+/* starOVer();{
+ document.getElementById("star1").innerHTML = `<i class="fas fa-star" style="color:#e72a79;"></i>`
 }  */
 
 
 
 document.addEventListener("DOMContentLoaded", function (e) {
-  
+
   getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (result) {
     if (result.status === "ok") {
       productComments = result.data;
-      console.log(result.data)
       let htmlContentToAppend = ""
 
       for (let i = 0; i < productComments.length; i++) {
         let comentario = productComments[i];
-        console.log(comentario.user)
-
+        
         var estrellas = "";
 
         for (n = 0; n < comentario.score; n++) {
@@ -102,17 +100,31 @@ document.addEventListener("DOMContentLoaded", function (e) {
         document.getElementById("reviews").innerHTML = htmlContentToAppend;
       }
 
+
+     /*  <div class="my-rating-4" data-rating="2.5"></div>
+                      <i class="far fa-star star" id="score1" style="color:#e72a79;"></i>
+                      <i class="far fa-star star" id="score2" style="color:#e72a79;"></i>
+                      <i class="far fa-star star" id="score3" style="color:#e72a79;"></i>
+                      <i class="far fa-star star" id="score4" style="color:#e72a79;"></i>
+                      <i class="far fa-star star" id="score5" style="color:#e72a79;"></i>
+              </div> */        
+     
       let formularioDeComentario = ""
       formularioDeComentario = `
             
               <h5 class="mt-4">Agrega tu opinión</h5>
               <div class="my-3">
-                      <i class="far fa-star star" id="score1" style="color:#e72a79;"></i>
-                      <i class="far fa-star" id="score2" style="color:#e72a79;"></i>
-                      <i class="far fa-star" id="score3" style="color:#e72a79;"></i>
-                      <i class="far fa-star" id="score4" style="color:#e72a79;"></i>
-                      <i class="far fa-star" id="score5" style="color:#e72a79;"></i>
-              </div>
+              <div>
+              <div class="rating-box">
+              <div class="ratings">
+                <span class="fa fa-star-o" title="1"></span>
+                <span class="fa fa-star-o" title="2"></span>
+                <span class="fa fa-star-o" title="3"></span>
+                <span class="fa fa-star-o" title="4"></span>
+                <span class="fa fa-star-o" title="5"></span>
+                <span id="rating-value" style="display:none;"></span>
+             </div>
+             </div>
               <div>
                 <div class="md-form md-outline">
                   <textarea id="comentarioNuevo" class="md-textarea form-control pr-6" rows="4" placeholder="Tu opinión o comentario" maxlength="200"></textarea>
@@ -132,15 +144,79 @@ document.addEventListener("DOMContentLoaded", function (e) {
         </div>
             `
       document.getElementById("info").innerHTML = formularioDeComentario;
-      $('#score1').mouseover(function () {
-        $('.star').removeClass('far fa-star');
-        $('.star').addClass('fas fa-star');
-      })
-      $('.star').mouseleave(function () {
-        
-        $('.star').removeClass('fas fa-star');
-        $('.star').addClass('far fa-star');
-      })
+
+      const estrellasRating=document.querySelector(".ratings").children;
+      const valorEstrella=document.querySelector("#rating-value");
+      let index;
+      
+
+      for (let i = 0; i < estrellasRating.length; i++) {
+        estrellasRating[i].addEventListener("mouseover",function(){
+          //console.log(i)
+          for (let j = 0; j < estrellasRating.length; j++) {
+            estrellasRating[j].classList.remove("fa-star")
+            estrellasRating[j].classList.add("fa-star-o")
+          }
+          for(let j = 0; j <=i; j++){
+            estrellasRating[j].classList.remove("fa-star-o")
+            estrellasRating[j].classList.add("fa-star")
+          } 
+        })
+        estrellasRating[i].addEventListener("click",function(){
+          valorEstrella.value=i+1;
+          index=i;
+        })
+        estrellasRating[i].addEventListener("mouseout",function(){
+          //console.log(i)
+          for (let j = 0; j < estrellasRating.length; j++) {
+            estrellasRating[j].classList.remove("fa-star")
+            estrellasRating[j].classList.add("fa-star-o")
+          }
+          for(let j = 0; j<=index; j++){
+            estrellasRating[j].classList.remove("fa-star-o")
+            estrellasRating[j].classList.add("fa-star")
+          } 
+        })
+      }
+
+      
+
+     /* 
+      $(document).ready(function(){
+        $(".my-rating-4").starRating({
+          totalStars: 5,
+          starShape: 'rounded',
+          starSize: 40,
+          emptyColor: 'lightgray',
+          hoverColor: 'salmon',
+          activeColor: 'crimson',
+          useGradient: false
+        });
+      });
+
+      function colorearEstrella() {
+        $('#score1').mouseover(function () {
+          $('.star').removeClass('far fa-star');
+          $('.star').addClass('fas fa-star');
+        })
+      }
+
+
+      function vaciarEstrella() {
+        $('.star').mouseleave(function () {
+          $('.star').removeClass('fas fa-star');
+          $('.star').addClass('far fa-star');
+        })
+      }
+ */
+    /*   colorearEstrella();
+      vaciarEstrella();
+      colorearEstrella2();
+      vaciarEstrella(); */
+
+
+
+
     }
   });
 });
@@ -148,7 +224,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
 function enviarComentario() {
   var comentarioNew = crearObjetoComentario();
   productComments.push(comentarioNew);
-  var comentariosActuales = document.getElementById("reviews");
+  var comentariosActuales = document.getElementById("reviews")
+  ;
   comentariosActuales.insertAdjacentHTML('afterend', `
     <div class="media mt-3 mb-4">
 <img class="d-flex mr-3 z-depth-1" src="/img/thumbComentario.png" width="62">
@@ -177,23 +254,33 @@ function enviarComentario() {
 }
 
 
-  var nuevaFecha = new Date();
-  var d  = nuevaFecha.getDate();
-  var dia = (d < 10) ? '0' + d : d;
-  var m = nuevaFecha.getMonth() + 1;
-  var mes = (m < 10) ? '0' + m : m;
-  var fechaHoy = nuevaFecha.getFullYear() + "-" + mes + "-" + dia;
-  console.log(fechaHoy);
-  var hora = nuevaFecha.getHours() + ":" + nuevaFecha.getMinutes() + ":" + nuevaFecha.getSeconds();
+var nuevaFecha = new Date();
+var d = nuevaFecha.getDate();
+var dia = (d < 10) ? '0' + d : d;
+var m = nuevaFecha.getMonth() + 1;
+var mes = (m < 10) ? '0' + m : m;
+var fechaHoy = nuevaFecha.getFullYear() + "-" + mes + "-" + dia;
+/* console.log(fechaHoy); */
+var hora = nuevaFecha.getHours() + ":" + nuevaFecha.getMinutes() + ":" + nuevaFecha.getSeconds();
 
 
-
+/* var estrellasHTMLCollection = document.getElementsByClassName("fa fa-star");
+var estrellasSeleccionadas = [].slice.call(estrellasHTMLCollection);
+console.log(typeOf(estrellasSeleccionadas)) */
 
 function crearObjetoComentario() {
   var comentarioNuevo = document.getElementById("comentarioNuevo");
   var nombreComentario = document.getElementById("comentarioNombre");
+  
+  document.getElementsByClassName("fa fa-star").addEventListener("click",function(){
+    var estrellasHTMLCollection = document.getElementsByClassName("fa fa-star");
+    var estrellasSeleccionadas = [].slice.call(estrellasHTMLCollection);
+    var scoreNuevo = estrellasSeleccionadas[estrellasSeleccionadas.length - 1].getAttribute("title");
+    console.log(scoreNuevo)
+  });
+
   var objComentarioNuevo = {
-    score: null,
+    score: scoreNuevo, 
     description: comentarioNuevo.value,
     user: nombreComentario.value,
     dateTime: fechaHoy + " " + hora
@@ -209,19 +296,19 @@ document.addEventListener("DOMContentLoaded", function (e) {
       productos = result.data;
       productRelated = productRelated.map(el => { //igual a escribir function(el){}
         return productos[el]
-      }) 
+      })
       //map, recorre el array y le aplica una funcion a cada elemento
       //a la funcion le pasa el parametro de el
       //"el" es cada elemento del array de relacionados
       //con el productos [el], devuelve el objeto en 
       //la posicion que indica los elementos del array de relacionados 
-     
+
       let productosRelacionadosHTML = ""
-    
+
       for (let i = 0; i < productRelated.length; i++) {
         let productoRelacionado = productRelated[i];
-        console.log(productoRelacionado)
-  
+        /* console.log(productoRelacionado) */
+
         productosRelacionadosHTML += `
           <div class="col-md-6 col-lg-3 mb-5">
   
@@ -241,93 +328,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
       </div>`
         document.getElementById("productosRelacionados").innerHTML = productosRelacionadosHTML;
       }
-    
-    
-    } 
 
-    
+
+    }
+
+
   });
 });
-
-
-
-
-/* 
-var infoProductos = []
-var productosReacionados = []
-
-
-  function conseguirDataJSON() {
-    getJSONData(PRODUCTS_URL).then(function (resultObj) {
-      if (resultObj.status === "ok") {
-      infoProductos = resultObj.data; 
-      } return infoProductos;    
-      console.log(resultObj.data)
-  });
-  }
-  
-  getJSONData(PRODUCT_INFO_URL).then(function (result) {
-    if (result.status === "ok") {
-    productosRelacionados = result.data.relatedProducts;
-      console.log(productosRelacionados)
-    } console.log(productosRelacionados)
-});  
-
-
-
-
-let productosRelacionadosHTML = ""
-
-    for (let i = 0; i < productosRelacionados.length; i++) {
-      let productoRelacionado = productosRelacionados[i];
-      console.log(productosRelacionados)}
-
-    for (let i = 0; i < infoProductos.length; i++) {
-      let productoRelacionadoHTML = infoProductos[productoRelacionado];
-      console.log(productoRelacionadoHTML)
-    }
-
-
- */
-
-
-/* document.addEventListener("DOMContentLoaded", function (e) {
-  getJSONData(PRODUCT_INFO_URL).then(function (result) {
-    if (result.status === "ok") {
-      productosRelacionadosJSON = result.data;
-      productosRelacionados = result.data.relatedProducts
-    }
-
-    let productosRelacionadosHTML = ""
-    for (let i = 0; i < productosRelacionados.length; i++) {
-      let productoRelacionado = productosRelacionados[i];
-      console.log(productosRelacionados)
-
-      productosRelacionadosHTML += `
-        <div class="col-md-6 col-lg-3 mb-5">
-
-        <div class="">
-  
-          <div class="view zoom overlay z-depth-2 rounded">
-            <img class="img-fluid w-100"
-              src="" alt="">
-          </div>
-  
-          <div class="pt-4">
-            <h5 id="tituloProductoRelacionado">sdada</h5>
-            <h6 id="precioProductoRelacionado">dsasda</h6>
-          </div>
-        </div>
-      </div>
-    </div>`
-      document.getElementById("reviews").innerHTML = productosRelacionadosHTML;
-    }
-  });
-});
- */
-
-
-
 
 
 $(document).ready(function () {
