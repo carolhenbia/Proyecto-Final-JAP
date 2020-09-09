@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
       for (let i = 0; i < productComments.length; i++) {
         let comentario = productComments[i];
-        
+
         var estrellas = "";
 
         for (n = 0; n < comentario.score; n++) {
@@ -88,8 +88,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 </div>
                         `
         document.getElementById("reviews").innerHTML = htmlContentToAppend;
-      }       
-     
+      }
+
       let formularioDeComentario = ""
       formularioDeComentario = `
             
@@ -126,37 +126,37 @@ document.addEventListener("DOMContentLoaded", function (e) {
             `
       document.getElementById("info").innerHTML = formularioDeComentario;
 
-      const estrellasRating=document.querySelector(".ratings").children;
-      const valorEstrella=document.querySelector("#rating-value");
+      const estrellasRating = document.querySelector(".ratings").children;
+      const valorEstrella = document.querySelector("#rating-value");
       let index;
-      
+
 
       for (let i = 0; i < estrellasRating.length; i++) {
-        estrellasRating[i].addEventListener("mouseover",function(){
+        estrellasRating[i].addEventListener("mouseover", function () {
           //console.log(i)
           for (let j = 0; j < estrellasRating.length; j++) {
             estrellasRating[j].classList.remove("fa-star")
             estrellasRating[j].classList.add("fa-star-o")
           }
-          for(let j = 0; j <=i; j++){
+          for (let j = 0; j <= i; j++) {
             estrellasRating[j].classList.remove("fa-star-o")
             estrellasRating[j].classList.add("fa-star")
-          } 
+          }
         })
-        estrellasRating[i].addEventListener("click",function(){
-          valorEstrella.value=i+1;
-          index=i;
+        estrellasRating[i].addEventListener("click", function () {
+          valorEstrella.value = i + 1;
+          index = i;
         })
-        estrellasRating[i].addEventListener("mouseout",function(){
+        estrellasRating[i].addEventListener("mouseout", function () {
           //console.log(i)
           for (let j = 0; j < estrellasRating.length; j++) {
             estrellasRating[j].classList.remove("fa-star")
             estrellasRating[j].classList.add("fa-star-o")
           }
-          for(let j = 0; j<=index; j++){
+          for (let j = 0; j <= index; j++) {
             estrellasRating[j].classList.remove("fa-star-o")
             estrellasRating[j].classList.add("fa-star")
-          } 
+          }
         })
       }
     }
@@ -167,7 +167,7 @@ function enviarComentario() {
   var comentarioNew = crearObjetoComentario();
   productComments.push(comentarioNew);
   var comentariosActuales = document.getElementById("reviews");
-  
+
   var estrellasNuevas = "";
 
   for (n = 0; n < comentarioNew.score; n++) {
@@ -179,27 +179,24 @@ function enviarComentario() {
   for (n = 0; n < estrellasVaciasNuevas; n++) {
     estrellasNuevas += `<i class="far fa-star fa-sm" style="color:#e72a79;"></i>`
   }
-
-  comentariosActuales.insertAdjacentHTML('afterend', `
-    <div class="media mt-3 mb-4">
+  comentariosActuales.innerHTML += `
+  <div class="media mt-3 mb-4">
 <img class="d-flex mr-3 z-depth-1" src="/img/thumbComentario.png" width="62">
 <div class="media-body">
 <div class="d-sm-flex justify-content-between">
-  <p class="mt-1 mb-2">
-    <strong> @${comentarioNew.user} </strong>
-    <span>– </span><span>${comentarioNew.dateTime}</span>
-  </p>
-  <ul class="rating mb-sm-0"> 
-  ${estrellasNuevas}
-  </ul>
+<p class="mt-1 mb-2">
+  <strong> @${comentarioNew.user} </strong>
+  <span>– </span><span>${comentarioNew.dateTime}</span>
+</p>
+<ul class="rating mb-sm-0"> 
+${estrellasNuevas}
+</ul>
 </div>
 <p class="mb-0">${comentarioNew.description}</p>
 </div>
 </div>
-    `)
-
-  document.getElementById("comentarioNuevo").value = "";
-  document.getElementById("comentarioNombre").value = "";
+  `;
+  cleanForm();
 }
 
 
@@ -212,14 +209,17 @@ var fechaHoy = nuevaFecha.getFullYear() + "-" + mes + "-" + dia;
 /* console.log(fechaHoy); */
 var hora = nuevaFecha.getHours() + ":" + nuevaFecha.getMinutes() + ":" + nuevaFecha.getSeconds();
 
+function cleanForm() {
+  document.getElementById("comentarioNuevo").value = "";
+  document.getElementById("comentarioNombre").value = "";
+}
 
-
-var scoreNuevo= "";
+var scoreNuevo = "";
 
 function clickStar(starElement) {
   console.log(starElement.dataset.value)
-  scoreNuevo= starElement.dataset.value; 
-} 
+  scoreNuevo = starElement.dataset.value;
+}
 //la estrella tiene un onclick="clickStar(this)"
 //eso hace que cuando le den click a la estrella agarra ese elemento y lo pasa a la funcion como parametro
 //el dataset es una forma de pasar datos. Se escribe "data" - "nombre que querramos"
@@ -232,13 +232,13 @@ function crearObjetoComentario() {
   var nombreComentario = document.getElementById("comentarioNombre");
 
   var objComentarioNuevo = {
-    score: scoreNuevo, 
+    score: scoreNuevo,
     description: comentarioNuevo.value,
     user: nombreComentario.value,
     dateTime: fechaHoy + " " + hora
-  } 
+  }
   return objComentarioNuevo;
-} 
+}
 
 var productos = [];
 
