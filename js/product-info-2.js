@@ -117,11 +117,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
               <div>
               <div class="rating-box">
               <div class="ratings">
-                <span class="fa fa-star-o" title="1"></span>
-                <span class="fa fa-star-o" title="2"></span>
-                <span class="fa fa-star-o" title="3"></span>
-                <span class="fa fa-star-o" title="4"></span>
-                <span class="fa fa-star-o" title="5"></span>
+                <span class="fa fa-star-o" onclick="clickStar(this)" data-value="1" ></span> 
+                <span class="fa fa-star-o" onclick="clickStar(this)" data-value="2" ></span>
+                <span class="fa fa-star-o" onclick="clickStar(this)" data-value="3" ></span>
+                <span class="fa fa-star-o" onclick="clickStar(this)" data-value="4" ></span>
+                <span class="fa fa-star-o" onclick="clickStar(this)" data-value="5" ></span>
                 <span id="rating-value" style="display:none;"></span>
              </div>
              </div>
@@ -178,45 +178,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
           } 
         })
       }
-
-      
-
-     /* 
-      $(document).ready(function(){
-        $(".my-rating-4").starRating({
-          totalStars: 5,
-          starShape: 'rounded',
-          starSize: 40,
-          emptyColor: 'lightgray',
-          hoverColor: 'salmon',
-          activeColor: 'crimson',
-          useGradient: false
-        });
-      });
-
-      function colorearEstrella() {
-        $('#score1').mouseover(function () {
-          $('.star').removeClass('far fa-star');
-          $('.star').addClass('fas fa-star');
-        })
-      }
-
-
-      function vaciarEstrella() {
-        $('.star').mouseleave(function () {
-          $('.star').removeClass('fas fa-star');
-          $('.star').addClass('far fa-star');
-        })
-      }
- */
-    /*   colorearEstrella();
-      vaciarEstrella();
-      colorearEstrella2();
-      vaciarEstrella(); */
-
-
-
-
     }
   });
 });
@@ -266,25 +227,24 @@ var hora = nuevaFecha.getHours() + ":" + nuevaFecha.getMinutes() + ":" + nuevaFe
 
 
 
-/* document.getElementsByClassName("fa fa-star").addEventListener("click",function(e){
-  console.log(e);
-  estrellaClickeada = e.target;
-  estrellaClickeada.getAttribute("title");
-});
- */
+function clickStar(starElement) {
+  console.log(starElement.dataset.value)
+  return starElement.dataset.value; 
+} 
+//la estrella tiene un onclick="clickStar(this)"
+//eso hace que cuando le den click a la estrella agarra ese elemento y lo pasa a la funcion como parametro
+//el dataset es una forma de pasar datos. Se escribe "data" - "nombre que querramos"
+//para agarrar el dato, se escribe "dataset" y despues el nombre que se haya colocado despues del guion
+
+
+
 function crearObjetoComentario() {
   var comentarioNuevo = document.getElementById("comentarioNuevo");
   var nombreComentario = document.getElementById("comentarioNombre");
-  
- /*  document.getElementsByClassName("fa fa-star").addEventListener("click",function(){
-    var estrellasHTMLCollection = document.getElementsByClassName("fa fa-star");
-    var estrellasSeleccionadas = [].slice.call(estrellasHTMLCollection);
-    var scoreNuevo = estrellasSeleccionadas[estrellasSeleccionadas.length - 1].getAttribute("title");
-    console.log(scoreNuevo)
-  }); */
-  
+  var scoreNuevo = clickStar(starElement);
+
   var objComentarioNuevo = {
-    score: null, 
+    score: scoreNuevo, 
     description: comentarioNuevo.value,
     user: nombreComentario.value,
     dateTime: fechaHoy + " " + hora
