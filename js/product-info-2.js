@@ -37,10 +37,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
   });
 });
 
-/* document.getElementById("imagen2Producto").addEventListener("mouseover", function () {
-  document.getElementById("imagen1Producto").src = this.src;
-}); */
-
 document.querySelector(".imgThumb").addEventListener("mouseover", function () {
   document.getElementById("imagen1Producto").src = this.src;
 });
@@ -51,12 +47,6 @@ document.querySelector(".imgThumb").addEventListener("mouseout", function () {
 
 /* Podes aplicarle una clase en particular a las imagenes y usar querySellectorAll(".clase")
  */
-
-/* starOVer();{
- document.getElementById("star1").innerHTML = `<i class="fas fa-star" style="color:#e72a79;"></i>`
-}  */
-
-
 
 document.addEventListener("DOMContentLoaded", function (e) {
 
@@ -98,16 +88,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 </div>
                         `
         document.getElementById("reviews").innerHTML = htmlContentToAppend;
-      }
-
-
-     /*  <div class="my-rating-4" data-rating="2.5"></div>
-                      <i class="far fa-star star" id="score1" style="color:#e72a79;"></i>
-                      <i class="far fa-star star" id="score2" style="color:#e72a79;"></i>
-                      <i class="far fa-star star" id="score3" style="color:#e72a79;"></i>
-                      <i class="far fa-star star" id="score4" style="color:#e72a79;"></i>
-                      <i class="far fa-star star" id="score5" style="color:#e72a79;"></i>
-              </div> */        
+      }       
      
       let formularioDeComentario = ""
       formularioDeComentario = `
@@ -185,8 +166,20 @@ document.addEventListener("DOMContentLoaded", function (e) {
 function enviarComentario() {
   var comentarioNew = crearObjetoComentario();
   productComments.push(comentarioNew);
-  var comentariosActuales = document.getElementById("reviews")
-  ;
+  var comentariosActuales = document.getElementById("reviews");
+  
+  var estrellasNuevas = "";
+
+  for (n = 0; n < comentarioNew.score; n++) {
+    estrellasNuevas += `<i class="fas fa-star fa-sm" style="color:#e72a79;"></i>`
+  }
+
+  var estrellasVaciasNuevas = Math.abs(comentarioNew.score - 5);
+
+  for (n = 0; n < estrellasVaciasNuevas; n++) {
+    estrellasNuevas += `<i class="far fa-star fa-sm" style="color:#e72a79;"></i>`
+  }
+
   comentariosActuales.insertAdjacentHTML('afterend', `
     <div class="media mt-3 mb-4">
 <img class="d-flex mr-3 z-depth-1" src="/img/thumbComentario.png" width="62">
@@ -197,11 +190,7 @@ function enviarComentario() {
     <span>– </span><span>${comentarioNew.dateTime}</span>
   </p>
   <ul class="rating mb-sm-0"> 
-      <i class="fas fa-star fa-sm" style="color:#e72a79;"></i>
-      <i class="fas fa-star fa-sm" style="color:#e72a79;"></i>
-      <i class="fas fa-star fa-sm" style="color:#e72a79;"></i>
-      <i class="far fa-star fa-sm" style="color:#e72a79;"></i>
-      <i class="far fa-star fa-sm" style="color:#e72a79;"></i>
+  ${estrellasNuevas}
   </ul>
 </div>
 <p class="mb-0">${comentarioNew.description}</p>
@@ -211,7 +200,6 @@ function enviarComentario() {
 
   document.getElementById("comentarioNuevo").value = "";
   document.getElementById("comentarioNombre").value = "";
-  document.getElementById("nombreEmail").value = "";
 }
 
 
@@ -226,10 +214,11 @@ var hora = nuevaFecha.getHours() + ":" + nuevaFecha.getMinutes() + ":" + nuevaFe
 
 
 
+var scoreNuevo= "";
 
 function clickStar(starElement) {
   console.log(starElement.dataset.value)
-  return starElement.dataset.value; 
+  scoreNuevo= starElement.dataset.value; 
 } 
 //la estrella tiene un onclick="clickStar(this)"
 //eso hace que cuando le den click a la estrella agarra ese elemento y lo pasa a la funcion como parametro
@@ -241,16 +230,15 @@ function clickStar(starElement) {
 function crearObjetoComentario() {
   var comentarioNuevo = document.getElementById("comentarioNuevo");
   var nombreComentario = document.getElementById("comentarioNombre");
-  var scoreNuevo = clickStar(starElement);
 
   var objComentarioNuevo = {
     score: scoreNuevo, 
     description: comentarioNuevo.value,
     user: nombreComentario.value,
     dateTime: fechaHoy + " " + hora
-  }
+  } 
   return objComentarioNuevo;
-}
+} 
 
 var productos = [];
 
@@ -299,15 +287,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
   });
 });
-
-
-$(document).ready(function () {
-  // MDB Lightbox Init
-  $(function () {
-    $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
-  });
-});
-
 
 document.addEventListener("DOMContentLoaded", function (e) {
   var isLoggedIn = window.localStorage.getItem("isLoggedIn") //agarra el item
