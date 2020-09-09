@@ -264,23 +264,27 @@ var fechaHoy = nuevaFecha.getFullYear() + "-" + mes + "-" + dia;
 var hora = nuevaFecha.getHours() + ":" + nuevaFecha.getMinutes() + ":" + nuevaFecha.getSeconds();
 
 
-/* var estrellasHTMLCollection = document.getElementsByClassName("fa fa-star");
-var estrellasSeleccionadas = [].slice.call(estrellasHTMLCollection);
-console.log(typeOf(estrellasSeleccionadas)) */
 
+
+/* document.getElementsByClassName("fa fa-star").addEventListener("click",function(e){
+  console.log(e);
+  estrellaClickeada = e.target;
+  estrellaClickeada.getAttribute("title");
+});
+ */
 function crearObjetoComentario() {
   var comentarioNuevo = document.getElementById("comentarioNuevo");
   var nombreComentario = document.getElementById("comentarioNombre");
   
-  document.getElementsByClassName("fa fa-star").addEventListener("click",function(){
+ /*  document.getElementsByClassName("fa fa-star").addEventListener("click",function(){
     var estrellasHTMLCollection = document.getElementsByClassName("fa fa-star");
     var estrellasSeleccionadas = [].slice.call(estrellasHTMLCollection);
     var scoreNuevo = estrellasSeleccionadas[estrellasSeleccionadas.length - 1].getAttribute("title");
     console.log(scoreNuevo)
-  });
-
+  }); */
+  
   var objComentarioNuevo = {
-    score: scoreNuevo, 
+    score: null, 
     description: comentarioNuevo.value,
     user: nombreComentario.value,
     dateTime: fechaHoy + " " + hora
