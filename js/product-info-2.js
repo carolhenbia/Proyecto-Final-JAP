@@ -37,14 +37,14 @@ document.addEventListener("DOMContentLoaded", function (e) {
   });
 });
 
-document.querySelector(".imgThumb").addEventListener("mouseover", function () {
+/* document.querySelector(".imgThumb").addEventListener("mouseover", function () {
   document.getElementById("imagen1Producto").src = this.src;
 });
 
 document.querySelector(".imgThumb").addEventListener("mouseout", function () {
   document.getElementById("imagen1Producto").src = productImages[0];
 });
-
+ */
 /* Podes aplicarle una clase en particular a las imagenes y usar querySellectorAll(".clase")
  */
 

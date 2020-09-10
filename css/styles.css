@@ -270,6 +270,12 @@ en una carpeta antes de esa. */
   transition: 0.4s;
 }
 
+.btn-comprar:hover {
+  background-color: #dd2f56 !important; 
+  color: white !important;
+  transition: 0.4s;
+}
+
 .boton-login:hover {
   background-color:#dd2f56;
   transition: 0.4s;
