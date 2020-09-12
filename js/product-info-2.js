@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         productosRelacionadosHTML += `
           <div class="col-md-6 col-lg-3 mb-5">
   
-          <div class="">
+          <div>
     
             <div class="view zoom overlay z-depth-2 rounded">
               <img class="img-fluid w-100"
