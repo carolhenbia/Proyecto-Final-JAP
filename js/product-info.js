@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
                 htmlContentToAppend += `
                         <div class="media mt-3 mb-4">
-                  <img class="d-flex mr-3 z-depth-1" src="/img/thumbComentario.png" width="62">
+                  <img class="d-flex mr-3 z-depth-1" src="./img/thumbComentario.png" width="62">
                   <div class="media-body">
                     <div class="d-sm-flex justify-content-between">
                       <p class="mt-1 mb-2">
@@ -217,7 +217,7 @@ function enviarComentario() {
     }
     comentariosActuales.innerHTML += `
   <div class="media mt-3 mb-4">
-<img class="d-flex mr-3 z-depth-1" src="/img/thumbComentario.png" width="62">
+<img class="d-flex mr-3 z-depth-1" src="./img/thumbComentario.png" width="62">
 <div class="media-body">
 <div class="d-sm-flex justify-content-between">
 <p class="mt-1 mb-2">
