@@ -151,7 +151,7 @@ a.custom-card:hover {
 }
 
 /* <offset-x> especifica la distancia horizontal. 
-Los valores negativos colocan las combra a la izquierda de el elemento. 
+Los valores negativos colocan las sombra a la izquierda de el elemento. 
 <offset-y> Especifica la distancia vertical. 
 Los valores negativos colocan la sombra por encima del elemento. */
 
@@ -314,17 +314,14 @@ a:hover.link-olvidaste-contraseña {
   height: 7vh;
 }
 
-@keyframes der-a-izq {
+/* @keyframes der-a-izq {
   0% {
     margin-left: 60%;
   } 
-  /* 60% {
-    margin-top: 50%;
-  } */
   100% {
     margin-left: 0%;
   }
-}
+} */
 
 .g-signin2 .abcRioButton {
   border-radius:10px;

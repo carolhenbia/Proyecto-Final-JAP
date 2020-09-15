@@ -20,12 +20,12 @@
         <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
         <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-        <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
         <div class="dropdown py-2 d-none d-md-inline-block">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="usuario">Usuari@:</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="usuario">Usuarie:</a>
           <div class="dropdown-menu">
-            <a href="#" class="dropdown-item">Favoritos</a>
-            <a href="#" class="dropdown-item" onclick="logOut()">Cerrar sesión</a>
+            <a href="#" class="dropdown-item"><i class="fas fa-user"></i> Mi Perfil</a>
+            <a href="cart.html" class="dropdown-item"><i class="fas fa-shopping-cart"></i> Mi Carrito</a>
+            <a href="#" class="dropdown-item" onclick="logOut()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
           </div>
         </div>
       </div>
@@ -109,5 +109,6 @@
     <script src="js/init.js"></script>
     <script src="js/products.js"></script>
     <script src="js/Buscador.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
