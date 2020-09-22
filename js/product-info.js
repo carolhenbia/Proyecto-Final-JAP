@@ -289,3 +289,30 @@ document.addEventListener("DOMContentLoaded", function (e) {
         window.location.href = "login.html" //lo manda al login 
     } else { document.getElementById("usuario").innerHTML = `Usuario: ${isLoggedIn}`; }
 });
+
+
+var listaCarrito = [];
+
+function agregarAlCarrito() {
+    var productoCarrito = {};
+
+    var nombreProducto = document.getElementById("tituloProducto").innerHTML; 
+    var fotoProducto = document.getElementById("imagen1Producto").innerHTML;
+    var precioProducto = document.getElementById("precioProducto").innerHTML;
+    var categoriaProducto = document.getElementById("categoriaProducto").innerHTML;
+
+    productoCarrito.nombre = nombreProducto; 
+    productoCarrito.foto = fotoProducto;
+    productoCarrito.precio = precioProducto;
+    productoCarrito.categoria = categoriaProducto;
+
+    listaCarrito.push(productoCarrito); 
+    localStorage.setItem("listaCarrito", JSON.stringify(listaCarrito)); 
+    console.log(listaCarrito)
+}
+
+
+
+
+
+
