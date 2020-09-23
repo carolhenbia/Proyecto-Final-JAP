@@ -41,10 +41,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
                         </div>
                         <div>
                           <div class="def-number-input number-input safari_only mb-0 w-100">
-                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                              class="minus" style="outline: none !important"></button onclick="calcularCantidad();">
-                            <input class="quantity" min="1" name="quantity" value="1" type="number"  id="inputCantidad" onclick="calcularCantidad();">
-                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                            <button onclick="this.parentNode.querySelector('input[type=number]').stepDown();calcularCantidad();"
+                              class="minus" style="outline: none !important"></button>
+                            <input class="quantity" min="1" name="quantity" value="1" type="number"  id="inputCantidad" onclick="">
+                            <button onclick="this.parentNode.querySelector('input[type=number]').stepUp();calcularCantidad();"
                               class="plus" onclick="calcularCantidad();" style="outline: none !important"></button>
                           </div>
                         </div>
@@ -69,19 +69,19 @@ document.addEventListener("DOMContentLoaded", function (e) {
               <div class="card-body">
                 <h5 class="mb-4">Seleccionar método de envío:</h5>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="metEnvio" id="metEnvio1" value="premium" checked>
+                  <input onclick="calcularMetodoEnvio();" class="form-check-input" type="radio" name="metEnvio" id="metEnvio1" value="premium" checked>
                   <label class="form-check-label" for="metEnvio1">
                     Premium: 2 a 5 días
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="metEnvio" id="metEnvio2" value="express">
+                  <input onclick="calcularMetodoEnvio();" class="form-check-input" type="radio" name="metEnvio" id="metEnvio2" value="express">
                   <label class="form-check-label" for="metEnvio2">
                     Express: 5 a 8 días
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="metEnvio" id="metEnvio3" value="standard">
+                  <input onclick="calcularMetodoEnvio();" class="form-check-input" type="radio" name="metEnvio" id="metEnvio3" value="standard">
                   <label class="form-check-label" for="metEnvio3">
                     Standard: 12 a 15 días
                   </label>
@@ -200,20 +200,19 @@ document.addEventListener("DOMContentLoaded", function (e) {
 }); 
 
 function calcularCantidad() {
-  var precioUnitario = document.getElementById("precioUnitario").innerHTML;
+  var precioUnitario = parseInt(document.getElementById("precioUnitario").innerHTML.replace('.',''));
   var inputCantidad = document.getElementById("inputCantidad").value;
   var precioNuevo = precioUnitario * inputCantidad;
-  precioUnitario.innerHTML = precioNuevo;
+  document.getElementById("precioUnitario").innerHTML = precioNuevo;
 }
 
 function calcularMetodoEnvio(){
   var metEnvio = document.getElementsByName('metEnvio');
-  var subtotal = document.getElementById("subtotal");
+  var subtotal = parseInt(document.getElementById("subtotal").innerHTML);
 
     for (var i = 0, length = metEnvio.length; i < length; i++) {
       if (metEnvio[i].checked) {
         var metEnvioElegido = metEnvio[i].value;
-
         if(metEnvioElegido == "premium"){
           document.getElementById("envio").innerHTML = subtotal * 1.15;
         } 
