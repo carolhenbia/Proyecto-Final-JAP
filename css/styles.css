@@ -272,8 +272,15 @@ en una carpeta antes de esa. */
 
 .btn-comprar:hover {
   background-color: #dd2f56 !important; 
+  border-color: #dd2f56 !important;
   color: white !important;
   transition: 0.4s;
+}
+
+.btn-comprar {
+  color:white; 
+  background-color: #e72a79; 
+  border-color: #e72a79;
 }
 
 .boton-login:hover {
@@ -435,4 +442,10 @@ a:hover.link-olvidaste-contraseña {
   margin-top: -.3rem;
   }
   }
+  }
+
+  #imagenCarrito {
+    border-radius:5px;
+      /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: -1px 1px 1px 1.5px rgba(0, 0, 0, 0.2);
   }

@@ -23,7 +23,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
             llamarDataProductos();
             document.getElementById("tituloProducto").innerHTML = productName;
             document.getElementById("descripcionProducto").innerHTML = productDesc;
-            document.getElementById("precioProducto").innerHTML = productCurr + " " + formatNumber(productCost);
+            document.getElementById("monedaProducto").innerHTML = productCurr;
+            document.getElementById("precioProducto").innerHTML = formatNumber(productCost);
             document.getElementById("categoriaProducto").innerHTML = productCategory;
             document.getElementById("subtituloPosicionamiento").innerHTML = `${productName} 2020 precio Uruguay`
             //la línea anterior fue generada como herramienta de posicionamiento
@@ -297,14 +298,16 @@ function agregarAlCarrito() {
     var productoCarrito = {};
 
     var nombreProducto = document.getElementById("tituloProducto").innerHTML; 
-    var fotoProducto = document.getElementById("imagen1Producto").innerHTML;
+    var fotoProducto = document.getElementById("imagen1Producto").src;
     var precioProducto = document.getElementById("precioProducto").innerHTML;
     var categoriaProducto = document.getElementById("categoriaProducto").innerHTML;
+    var monedaProducto = document.getElementById("monedaProducto").innerHTML;
 
     productoCarrito.nombre = nombreProducto; 
-    productoCarrito.foto = fotoProducto;
+    productoCarrito.foto = fotoProducto; 
     productoCarrito.precio = precioProducto;
     productoCarrito.categoria = categoriaProducto;
+    productoCarrito.moneda = monedaProducto;
 
     listaCarrito.push(productoCarrito); 
     localStorage.setItem("listaCarrito", JSON.stringify(listaCarrito)); 
