@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                           <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3" style="color:#dd2f56"><i
                               class="fas fa-trash-alt mr-1"></i>Remover Producto </a>
                         </div>
-                        <p class="mb-0"><span><strong>${productoCarrito.moneda}</strong><strong> ${productoCarrito.precio}</strong></span></p>
+                        <p class="mb-0"><span><strong>${productoCarrito.moneda}</strong><strong id="precioUnitario"> ${productoCarrito.precio}</strong></span></p>
                       </div>
                     </div>
                   </div>
@@ -84,19 +84,22 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 </div>
 
                 <div class="form-check">
-                  <input onclick="calcularMetodoEnvio();" class="form-check-input" type="radio" name="metEnvio" id="metEnvio1" value="premium" checked>
+                  <input onclick="calcularMetodoEnvio();" class="form-check-input" 
+                  type="radio" name="metEnvio" id="metEnvio1" value="premium" checked required>
                   <label class="form-check-label" for="metEnvio1">
                     Premium: 2 a 5 días
                   </label>
                 </div>
                 <div class="form-check">
-                  <input onclick="calcularMetodoEnvio();" class="form-check-input" type="radio" name="metEnvio" id="metEnvio2" value="express">
+                  <input onclick="calcularMetodoEnvio();" class="form-check-input" 
+                  type="radio" name="metEnvio" id="metEnvio2" value="express">
                   <label class="form-check-label" for="metEnvio2">
                     Express: 5 a 8 días
                   </label>
                 </div>
                 <div class="form-check">
-                  <input onclick="calcularMetodoEnvio();" class="form-check-input" type="radio" name="metEnvio" id="metEnvio3" value="standard">
+                  <input onclick="calcularMetodoEnvio();" class="form-check-input" 
+                  type="radio" name="metEnvio" id="metEnvio3" value="standard">
                   <label class="form-check-label" for="metEnvio3">
                     Standard: 12 a 15 días
                   </label>
@@ -111,7 +114,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
                 <h5 class="mb-4">Seleccionar método de pago:</h5>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="metPago" id="metPago1" value="tarjeta" checked data-toggle="modal" data-target="#modalTarjeta">
+                  <input class="form-check-input" type="radio" name="metPago" id="metPago1" 
+                  value="tarjeta" checked data-toggle="modal" data-target="#modalTarjeta" required>
                   <label class="form-check-label" for="metPago1">
                     Tarjeta de Crédito
                     <img class="mr-2" width="45px"
@@ -126,7 +130,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
                   </label>
                 </div>
                 <div class="form-check" style="margin-top:1em";>
-                  <input class="form-check-input" type="radio" name="metPago" id="metPago2" value="transferencia" data-toggle="modal" data-target="#modalTransferencia">
+                  <input class="form-check-input" type="radio" name="metPago" id="metPago2" 
+                  value="transferencia" data-toggle="modal" data-target="#modalTransferencia">
                   <label class="form-check-label" for="metPago2">
                     Transferencia Bancaria
                     <img class="mr-2" width="35em"
@@ -245,8 +250,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
                   
                             <!-- Email -->
                             <div class="md-form md-outline mt-0">
-                              <label for="email">Email:</label>
-                              <input type="email" id="email" class="form-control" style="margin-bottom:1em !important;">                              
+                              <label for="emailTarjeta">Email:</label>
+                              <input type="email" id="emailTarjeta" class="form-control" style="margin-bottom:1em !important;">                              
                             </div>
 
                           </div>
@@ -395,30 +400,32 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
                 <h5 class="mb-3">Precio total</h5>
 
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-flush" id="precios">
                   <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                   ${productoCarrito.nombre}
-                    <span id="precioUnitario">${(productoCarrito.precio)}</span>
+                    <span id="precioPorUnidad">${(productoCarrito.precio)}</span>
                   </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                    Subtotal
-                    <span id="subtotal">100</span>
-                  </li>
+                 
                   <hr>
                   <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                    Envío
-                    <span id="envio">XXX</span>
+                    Subtotal
+                    <span id="subtotal"></span>
                   </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                    Envío
+                    <span id="envio"></span>
+                  </li>
+                  
                   <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                     <div>
                       <strong>Costo TOTAL</strong>
-                        <p class="mb-0">(con IVA)</p>
+                        <p class="mb-0">(sin IVA)</p>
                     </div>
-                    <span><strong>XXX</strong></span>
+                    <span><strong id="total"></strong></span>
                   </li>
                 </ul>
 
-                <button type="button" class="btn btn-primary btn-comprar btn-block waves-effect waves-light">Comprar</button>
+                <button type="submit" class="btn btn-primary btn-comprar btn-block waves-effect waves-light">Comprar</button>
 
               </div>
             </div>
@@ -457,28 +464,48 @@ function calcularCantidad() {
   var precioUnitario = parseInt(document.getElementById("precioUnitario").innerHTML.replace('.', ''));
   var inputCantidad = document.getElementById("inputCantidad").value;
   var precioNuevo = precioUnitario * inputCantidad;
-  document.getElementById("precioUnitario").innerHTML = precioNuevo;
+  document.getElementById("precioPorUnidad").innerHTML = formatNumber(precioNuevo);
 }
+
+
+document.addEventListener("DOMContentLoaded", function subtotal (e) {
+  var precioUnitario = parseInt(document.getElementById("precioUnitario").innerHTML.replace('.', ''));
+  document.getElementById("subtotal").innerHTML = formatNumber(precioUnitario); 
+});
+
+function total(){
+  var subtotal = parseInt(document.getElementById("subtotal").innerHTML.replace('.', ''));
+  var metEnvio = parseInt(document.getElementById("envio").innerHTML.replace('.', '')); console.log(metEnvio)
+
+  if (metEnvio != NaN){
+    document.getElementById("total").innerHTML = formatNumber(subtotal + metEnvio); 
+  }
+} 
+  
+
+  
+
 
 function calcularMetodoEnvio() {
   var metEnvio = document.getElementsByName('metEnvio');
-  var subtotal = parseInt(document.getElementById("subtotal").innerHTML);
+  var subtotal = parseInt(document.getElementById("subtotal").innerHTML.replace('.', ''));
 
   for (var i = 0, length = metEnvio.length; i < length; i++) {
     if (metEnvio[i].checked) {
       var metEnvioElegido = metEnvio[i].value;
       if (metEnvioElegido == "premium") {
-        document.getElementById("envio").innerHTML = subtotal * 1.15;
+        document.getElementById("envio").innerHTML = formatNumber((subtotal * 1.15).toFixed(0));
       }
       if (metEnvioElegido == "express") {
-        document.getElementById("envio").innerHTML = subtotal * 1.07;
+        document.getElementById("envio").innerHTML = formatNumber((subtotal * 1.07).toFixed(0));
       }
       if (metEnvioElegido == "standard") {
-        document.getElementById("envio").innerHTML = subtotal * 1.05;
+        document.getElementById("envio").innerHTML = formatNumber((subtotal * 1.05).toFixed(0));
       }
     }
   }
-}
+  total();
+} 
 
 
 
