@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                       <div class="def-number-input number-input safari_only mb-0 w-100">
                         <button onclick="this.parentNode.querySelector('input[type=number]').stepDown();calcularCantidad();"
                           class="minus" style="outline: none !important"></button>
-                        <input class="quantity" min="1" name="quantity" value="${productoCarrito.count}" type="number"  id="inputCantidad" onclick="">
+                        <input class="quantity" min="1" name="quantity" value="${productoCarrito.count}" type="number"  id="inputCantidad${i}" onclick="">
                         <button onclick="this.parentNode.querySelector('input[type=number]').stepUp();calcularCantidad();"
                           class="plus" onclick="calcularCantidad();" style="outline: none !important"></button>
                       </div>
