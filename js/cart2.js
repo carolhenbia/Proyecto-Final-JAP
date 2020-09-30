@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     </div>
                     <div>
                       <div class="def-number-input number-input safari_only mb-0 w-100">
-                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown(); calcularCantidad(i);"
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown(); calcularCantidad(${i});"
                           class="minus" style="outline: none !important"></button>
                         <input class="quantity" min="1" name="quantity" value="${productoCarrito.count}" type="number"  id="inputCantidad${i}">
                         <button onclick="this.parentNode.querySelector('input[type=number]').stepUp(); calcularCantidad(${i});"
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       listadoPrecios = `
           <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
           ${productoCarrito.name} 
-          <span id="costoFinal${[i]}">${formatNumber(productoCarrito.unitCost)}</span>
+          <span id="costoFinal${[i]}" class="sumaSubtotal">${formatNumber(productoCarrito.unitCost)}</span>
           </li>
         `
       document.getElementById("productoUnitario").innerHTML += (listadoPrecios); 
@@ -81,13 +81,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
     }
   }); 
 });
-
-/* var productoUnitario = document.getElementById("productoUnitario").innerHTML
-let elements = document.getElementsByClassName("nombreProd")[0].outerHTML; 
-let listadoElements = Array.from(elements);
-console.log(elements)
- */
-
 
 
 function calcularCantidad(index) {
@@ -98,9 +91,11 @@ function calcularCantidad(index) {
 }
 
 
-document.addEventListener("DOMContentLoaded", function subtotal (e) {
-  var precioUnitario = parseInt(document.getElementById("precioUnitario").innerHTML.replace('.', ''));
-  document.getElementById("subtotal").innerHTML = formatNumber(precioUnitario); 
+window.addEventListener("load", function subtotal (e) {
+  var subtotal = document.getElementsByClassName("sumaSubtotal"); console.log(subtotal[0])
+  //var subtotales = Array.from(subtotal); console.log(subtotales)
+  //subtotal += subtotal;
+  //document.getElementById("subtotal").innerHTML = formatNumber(subtotal); 
 });
 
 function total(){
