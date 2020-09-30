@@ -44,10 +44,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     </div>
                     <div>
                       <div class="def-number-input number-input safari_only mb-0 w-100">
-                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown();calcularCantidad(i);"
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown(); calcularCantidad(i);"
                           class="minus" style="outline: none !important"></button>
                         <input class="quantity" min="1" name="quantity" value="${productoCarrito.count}" type="number"  id="inputCantidad${i}">
-                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp();calcularCantidad(i);"
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp(); calcularCantidad(${i});"
                           class="plus"style="outline: none !important"></button>
                       </div>
                     </div>
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       listadoPrecios = `
           <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
           ${productoCarrito.name} 
-          <span id="costoFinal${[i]}<">${formatNumber(productoCarrito.unitCost)}</span>
+          <span id="costoFinal${[i]}">${formatNumber(productoCarrito.unitCost)}</span>
           </li>
         `
       document.getElementById("productoUnitario").innerHTML += (listadoPrecios); 
@@ -92,9 +92,8 @@ console.log(elements)
 
 function calcularCantidad(index) {
   var precioUnitario = parseInt(document.getElementById(`precioUnitario${index}`).innerHTML.replace('.', ''));
-  console.log(precioUnitario)
-  var inputCantidad = document.getElementById(`inputCantidad${index}`).value;
-  var precioNuevo = precioUnitario * inputCantidad;
+  var inputCantidad = document.getElementById(`inputCantidad${index}`).value; 
+  var precioNuevo = precioUnitario * inputCantidad; console.log(precioNuevo)
   document.getElementById(`costoFinal${index}`).innerHTML = formatNumber(precioNuevo);
 }
 
