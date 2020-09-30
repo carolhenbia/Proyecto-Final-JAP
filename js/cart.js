@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
               <div class="card-body">
                 <h5 class="mb-4">Seleccionar método de envío:</h5>
 
+                
                 <div class="md-form md-outline mt-0">
                   <label for="direccion">Dirección de envío:</label>
                   <input type="text" id="direccion" placeholder="Ingrese su dirección: Calle, número, esquina" class="form-control" 
@@ -152,6 +153,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
             <!-- Modal Tarjeta de Crédito -->
             <div class="modal fade" id="modalTarjeta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" style="max-width: 40em">
+              <form>
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ingrese los siguientes datos:</h5>
@@ -272,10 +274,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 </div>
               </div>
             </div>
-    
+            </form>
             <!-- Modal Transferencia Bancaria -->
             <div class="modal fade" id="modalTransferencia" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" style="max-width: 40em">
+              <form>
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ingrese los siguientes datos:</h5>
@@ -332,7 +335,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                               <label>Seleccione un banco</label>
                               <div class="select-outline position-relative w-100">
                                 <select class="mdb-select md-form md-outline dropdown-item" style="border: 1px solid #ced4da;
-                                border-radius: .25rem; padding: .375rem .75rem; margin-bottom:1em !important;">
+                                border-radius: .25rem; padding: .375rem .75rem; margin-bottom:1em !important;" required>
                                   <option value="" disabled selected>Banco</option>
                                   <option value="Brou">Brou</option>
                                   <option value="Itau">Itau</option>
@@ -365,7 +368,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                             <!-- Email -->
                             <div class="md-form md-outline mt-0">
                               <label for="email">Email:</label>
-                              <input type="email" id="email" class="form-control" style="margin-bottom:1em !important;">                              
+                              <input type="email" id="email" class="form-control" style="margin-bottom:1em !important;" required>                              
                             </div>
                   
                           </div>
@@ -386,6 +389,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 </div>
               </div>
             </div>
+          </form>
 
             
           </div>
