@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                           class="minus" style="outline: none !important"></button>
                         <input class="quantity" min="1" name="quantity" value="${productoCarrito.count}" type="number"  id="inputCantidad${i}" onclick="">
                         <button onclick="this.parentNode.querySelector('input[type=number]').stepUp();calcularCantidad();"
-                          class="plus" onclick="calcularCantidad();" style="outline: none !important"></button>
+                          class="plus" onclick="calcularCantidad(i);" style="outline: none !important"></button>
                       </div>
                     </div>
                   </div>
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                       <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3" style="color:#dd2f56"><i
                           class="fas fa-trash-alt mr-1"></i>Remover Producto </a>
                     </div>
-                    <p class="mb-0"><span><strong>${productoCarrito.currency}</strong><strong id="precioUnitario"> ${formatNumber(productoCarrito.unitCost)}</strong></span></p>
+                    <p class="mb-0"><span><strong>${productoCarrito.currency}</strong><strong id="precioUnitario${i}"> ${formatNumber(productoCarrito.unitCost)}</strong></span></p>
                   </div>
                 </div>
               </div>
@@ -80,9 +80,9 @@ console.log(elements)
 
 
 
-function calcularCantidad() {
-  var precioUnitario = parseInt(document.getElementById("precioUnitario").innerHTML.replace('.', ''));
-  var inputCantidad = document.getElementById("inputCantidad").value;
+function calcularCantidad(index) {
+  var precioUnitario = parseInt(document.getElementById(`precioUnitario${index}`).innerHTML.replace('.', ''));
+  var inputCantidad = document.getElementById(`inputCantidad${index}`).value;
   var precioNuevo = precioUnitario * inputCantidad;
   document.getElementById("precioPorUnidad").innerHTML = formatNumber(precioNuevo);
 }
