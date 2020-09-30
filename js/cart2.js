@@ -44,11 +44,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     </div>
                     <div>
                       <div class="def-number-input number-input safari_only mb-0 w-100">
-                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown();calcularCantidad();"
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown();calcularCantidad(i);"
                           class="minus" style="outline: none !important"></button>
-                        <input class="quantity" min="1" name="quantity" value="${productoCarrito.count}" type="number"  id="inputCantidad${i}" onclick="">
-                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp();calcularCantidad();"
-                          class="plus" onclick="calcularCantidad(i);" style="outline: none !important"></button>
+                        <input class="quantity" min="1" name="quantity" value="${productoCarrito.count}" type="number"  id="inputCantidad${i}">
+                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp();calcularCantidad(i);"
+                          class="plus"style="outline: none !important"></button>
                       </div>
                     </div>
                   </div>
@@ -67,24 +67,35 @@ document.addEventListener("DOMContentLoaded", function (e) {
         <!-- Card -->`
 
       document.getElementById("listadoCompletoCarrito").innerHTML = listadoProdCarrito;
+
+      var listadoPrecios = "";
+
+      listadoPrecios = `
+          <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+          ${productoCarrito.name} 
+          <span id="costoFinal${[i]}<">${formatNumber(productoCarrito.unitCost)}</span>
+          </li>
+        `
+      document.getElementById("productoUnitario").innerHTML += (listadoPrecios); 
       }
     }
   }); 
 });
 
-var productoUnitario = document.getElementById("productoUnitario").innerHTML
+/* var productoUnitario = document.getElementById("productoUnitario").innerHTML
 let elements = document.getElementsByClassName("nombreProd")[0].outerHTML; 
 let listadoElements = Array.from(elements);
 console.log(elements)
-
+ */
 
 
 
 function calcularCantidad(index) {
   var precioUnitario = parseInt(document.getElementById(`precioUnitario${index}`).innerHTML.replace('.', ''));
+  console.log(precioUnitario)
   var inputCantidad = document.getElementById(`inputCantidad${index}`).value;
   var precioNuevo = precioUnitario * inputCantidad;
-  document.getElementById("precioPorUnidad").innerHTML = formatNumber(precioNuevo);
+  document.getElementById(`costoFinal${index}`).innerHTML = formatNumber(precioNuevo);
 }
 
 
