@@ -78,9 +78,20 @@ document.addEventListener("DOMContentLoaded", function (e) {
         `
       document.getElementById("productoUnitario").innerHTML += (listadoPrecios); 
       }
+      calcularSubtotal();
     }
   }); 
 });
+
+function calcularSubtotal(){
+  var prods = document.querySelectorAll("#productoUnitario li span");
+  var subtotal = 0;
+  for (let i = 0; i < prods.length; i++) {
+    const prod = prods[i].innerHTML.replace(".", "");
+    subtotal += parseInt(prod);
+  }
+  document.getElementById("subtotal").innerHTML = formatNumber(subtotal);
+}
 
 
 function calcularCantidad(index) {
@@ -88,6 +99,9 @@ function calcularCantidad(index) {
   var inputCantidad = document.getElementById(`inputCantidad${index}`).value; 
   var precioNuevo = precioUnitario * inputCantidad; console.log(precioNuevo)
   document.getElementById(`costoFinal${index}`).innerHTML = formatNumber(precioNuevo);
+  calcularSubtotal();
+  calcularMetodoEnvio();
+  total();
 }
 
 
