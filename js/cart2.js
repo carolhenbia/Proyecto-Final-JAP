@@ -113,10 +113,11 @@ window.addEventListener("load", function subtotal (e) {
 });
 
 function total(){
+  var subtotal = parseInt(document.getElementById("subtotal").innerHTML.replace('.', ''));
   var metEnvio = parseInt(document.getElementById("envio").innerHTML.replace('.', '')); console.log(metEnvio)
 
   if (metEnvio != NaN){
-    document.getElementById("total").innerHTML = formatNumber(metEnvio); 
+    document.getElementById("total").innerHTML = formatNumber(subtotal + metEnvio); 
   }
 } 
   
@@ -128,13 +129,13 @@ function calcularMetodoEnvio() {
     if (metEnvio[i].checked) {
       var metEnvioElegido = metEnvio[i].value;
       if (metEnvioElegido == "premium") {
-        document.getElementById("envio").innerHTML = formatNumber((subtotal * 1.15).toFixed(0));
+        document.getElementById("envio").innerHTML = formatNumber((subtotal * 0.15).toFixed(0));
       }
       if (metEnvioElegido == "express") {
-        document.getElementById("envio").innerHTML = formatNumber((subtotal * 1.07).toFixed(0));
+        document.getElementById("envio").innerHTML = formatNumber((subtotal * 0.07).toFixed(0));
       }
       if (metEnvioElegido == "standard") {
-        document.getElementById("envio").innerHTML = formatNumber((subtotal * 1.05).toFixed(0));
+        document.getElementById("envio").innerHTML = formatNumber((subtotal * 0.05).toFixed(0));
       }
     }
   }
@@ -155,9 +156,9 @@ function compraConfirmada(){
             
                 
                 <div class="card-body cart">
-                    <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
-                        <h3><strong>¡Tu carrito está vacío!</strong></h3>
-                        <h4>Agrega lo que desees :)</h4> <a href="/products.html" class="btn btn-primary cart-btn-transform m-3 btn-comprar" data-abc="true">Continuar comprando</a>
+                    <div class="col-sm-12 empty-cart-cls text-center"> <img src="./img/carrito.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                        <h3><strong>¡Compra realizada con éxito!</strong></h3>
+                        <h4>Gracias por tu compra :)</h4> <a href="/products.html" class="btn btn-primary cart-btn-transform m-3 btn-comprar" data-abc="true">Continuar comprando</a>
                     </div>
                 </div>
             
@@ -174,7 +175,7 @@ function compraConfirmada(){
         </button>
       </div>
       <div class="modal-body">
-        Asegurate de haber seleccionado un método de envío y un método de pago. <b>Chequea que todos los campos estén completos.</b>
+      <b>Asegurate de haber seleccionado un método de envío y un método de pago.</b> Chequea que todos los campos estén completos.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary btn-comprar" data-dismiss="modal">Entendido</button>
