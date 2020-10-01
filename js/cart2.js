@@ -113,15 +113,13 @@ window.addEventListener("load", function subtotal (e) {
 });
 
 function total(){
-  var subtotal = parseInt(document.getElementById("subtotal").innerHTML.replace('.', ''));
   var metEnvio = parseInt(document.getElementById("envio").innerHTML.replace('.', '')); console.log(metEnvio)
 
   if (metEnvio != NaN){
-    document.getElementById("total").innerHTML = formatNumber(subtotal + metEnvio); 
+    document.getElementById("total").innerHTML = formatNumber(metEnvio); 
   }
 } 
   
-
 function calcularMetodoEnvio() {
   var metEnvio = document.getElementsByName('metEnvio');
   var subtotal = parseInt(document.getElementById("subtotal").innerHTML.replace('.', ''));
@@ -142,6 +140,49 @@ function calcularMetodoEnvio() {
   }
   total();
 } 
+
+function compraConfirmada(){
+  var envio = document.getElementById("envio").innerHTML;
+  var direccion = document.getElementById("direccion"); console.log(direccion)
+  var pais = document.getElementById("pais");
+  if(envio != "" && direccion.value != "" && pais.value != ""){
+    var borrar = document.getElementById("carritoCompleto");
+    borrar.remove();
+    var vacio = document.getElementById("vacio");
+    vacio.innerHTML = `<div class="container-fluid mt-100">
+    <div class="row">
+        <div class="col-md-12">
+            
+                
+                <div class="card-body cart">
+                    <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                        <h3><strong>¡Tu carrito está vacío!</strong></h3>
+                        <h4>Agrega lo que desees :)</h4> <a href="/products.html" class="btn btn-primary cart-btn-transform m-3 btn-comprar" data-abc="true">Continuar comprando</a>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>`
+  } else { document.getElementById("faltaMetodo").innerHTML = ('afterend',`<div class="modal fade" id="carritoVacioAlert" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">¡Falta información!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Asegurate de haber seleccionado un método de envío y un método de pago. <b>Chequea que todos los campos estén completos.</b>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-comprar" data-dismiss="modal">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>`)}
+}
 
 document.addEventListener("DOMContentLoaded", function (e) {
   var isLoggedIn = window.localStorage.getItem("isLoggedIn") //agarra el item
