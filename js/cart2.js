@@ -79,6 +79,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
       document.getElementById("productoUnitario").innerHTML += (listadoPrecios); 
       }
       calcularSubtotal();
+
+    /*   function removerProducto(index){
+        contenidoCarrito[index].remove();
+        console.log(contenidoCarrito);
+  
+
+      }  */
     }
   }); 
 });
@@ -184,6 +191,8 @@ function compraConfirmada(){
   </div>
 </div>`)}
 }
+
+
 
 document.addEventListener("DOMContentLoaded", function (e) {
   var isLoggedIn = window.localStorage.getItem("isLoggedIn") //agarra el item
