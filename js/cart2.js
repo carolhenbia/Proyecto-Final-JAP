@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                   </div>
                   <div class="d-flex justify-content-between align-items-center">
                     <div>
-                      <a href="#!" onclick="removerProd(this)" data-value="${i}"  type="button" id="removerProd${i}"class="card-link-secondary small text-uppercase mr-3" style="color:#dd2f56"><i
+                      <a href="#!" onclick="removerProd(this, ${contenidoCarrito}, ${listadoProdCarrito}, ${listadoPrecios});" data-value="${i}"  type="button" id="removerProd${i}"class="card-link-secondary small text-uppercase mr-3" style="color:#dd2f56"><i
                           class="fas fa-trash-alt mr-1"></i>Remover Producto</a>
                     </div>
                     <p class="mb-0"><span><strong>${productoCarrito.currency}</strong><strong id="precioUnitario${i}"> ${formatNumber(productoCarrito.unitCost)}</strong></span></p>
@@ -87,12 +87,12 @@ document.addEventListener("DOMContentLoaded", function (e) {
   }); 
 });
 
-function removerProd(producto){
-  var productoABorrar = producto.dataset.value; console.log(productoABorrar)
-  contenidoCarrito.splice(productoABorrar,1);
-  document.getElementById("listadoCompletoCarrito").innerHTML = listadoProdCarrito;
-  document.getElementById("productoUnitario").innerHTML += (listadoPrecios); 
-} 
+function removerProd(producto, contenido, listadoProductos, listadoMontos){
+  var productoABorrar = producto.dataset.value;
+  contenido.splice(productoABorrar,1);
+  document.getElementById("listadoCompletoCarrito").innerHTML = listadoProductos;
+  document.getElementById("productoUnitario").innerHTML = (listadoMontos); 
+}
 
 
 
