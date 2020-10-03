@@ -9,6 +9,8 @@ function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
 } //función que divide los números en miles, así aparece el punto
 
+
+
 document.addEventListener("DOMContentLoaded", function (e) {
   getJSONData(CART_PRODUCTS).then(function (result) {
       if (result.status === "ok") {
@@ -17,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         var cantidadProdCarrito = 0;
       
         for (let i = 0; i < contenidoCarrito.length; i++) {
-        let productoCarrito = contenidoCarrito[i]; 
+        let productoCarrito = contenidoCarrito[i];
         cantidadProdCarrito = contenidoCarrito.length;
 
         if(productoCarrito.currency == "UYU") {
@@ -25,9 +27,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
           productoCarrito.currency = "USD";
         }
 
+        document.getElementById("badge").innerHTML = cantidadProdCarrito;
+
         listadoProdCarrito += ` 
         <!-- Card -->
-          <div class="card-body">
+          <div class="card-body" id="prodCard${i}">
             <div class="row mb-4">
               <div class="col-md-5 col-lg-3 col-xl-3">
                 <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
@@ -54,8 +58,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
                   </div>
                   <div class="d-flex justify-content-between align-items-center">
                     <div>
-                      <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3" style="color:#dd2f56"><i
-                          class="fas fa-trash-alt mr-1"></i>Remover Producto </a>
+                      <a href="#!" onclick="removerProd(this)" data-value="${i}"  type="button" id="removerProd${i}"class="card-link-secondary small text-uppercase mr-3" style="color:#dd2f56"><i
+                          class="fas fa-trash-alt mr-1"></i>Remover Producto</a>
                     </div>
                     <p class="mb-0"><span><strong>${productoCarrito.currency}</strong><strong id="precioUnitario${i}"> ${formatNumber(productoCarrito.unitCost)}</strong></span></p>
                   </div>
@@ -76,19 +80,21 @@ document.addEventListener("DOMContentLoaded", function (e) {
           <span id="costoFinal${[i]}" class="sumaSubtotal">${formatNumber(productoCarrito.unitCost)}</span>
           </li>
         `
-      document.getElementById("productoUnitario").innerHTML += (listadoPrecios); 
+      document.getElementById("productoUnitario").innerHTML += listadoPrecios; 
       }
       calcularSubtotal();
-
-    /*   function removerProducto(index){
-        contenidoCarrito[index].remove();
-        console.log(contenidoCarrito);
-  
-
-      }  */
     }
   }); 
 });
+
+function removerProd(producto){
+  var productoABorrar = producto.dataset.value; console.log(productoABorrar)
+  contenidoCarrito.splice(productoABorrar,1);
+  document.getElementById("listadoCompletoCarrito").innerHTML = listadoProdCarrito;
+  document.getElementById("productoUnitario").innerHTML += (listadoPrecios); 
+} 
+
+
 
 function calcularSubtotal(){
   var prods = document.querySelectorAll("#productoUnitario li span");
@@ -110,14 +116,6 @@ function calcularCantidad(index) {
   calcularMetodoEnvio();
   total();
 }
-
-
-window.addEventListener("load", function subtotal (e) {
-  var subtotal = document.getElementsByClassName("sumaSubtotal"); console.log(subtotal[0])
-  //var subtotales = Array.from(subtotal); console.log(subtotales)
-  //subtotal += subtotal;
-  //document.getElementById("subtotal").innerHTML = formatNumber(subtotal); 
-});
 
 function total(){
   var subtotal = parseInt(document.getElementById("subtotal").innerHTML.replace('.', ''));
