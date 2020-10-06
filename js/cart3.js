@@ -1,35 +1,41 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function (e) {
-
-});
 
 function formatNumber(num) {
   return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
 } //función que divide los números en miles, así aparece el punto
 
 var contenidoCarrito = [];
+var metEnvio = 0;
+var cantidadProdCarrito = 0;
 
 document.addEventListener("DOMContentLoaded", function (e) {
-  getJSONData(CART_PRODUCTS).then(function (result) {
-      if (result.status === "ok") {
-        var contenidoCarrito = result.data.articles; 
-        var listadoProdCarrito = "";
-        var cantidadProdCarrito = 0;
-      
-        for (let i = 0; i < contenidoCarrito.length; i++) {
-        let productoCarrito = contenidoCarrito[i];
-        cantidadProdCarrito = contenidoCarrito.length;
+  getJSONData(CART_PRODUCTS).then(function (result){
+    if (result.status === "ok"){
+      contenidoCarrito = result.data.articles;
+      mostrarCarrito(contenidoCarrito);
+      mostrarTotal(contenidoCarrito);
+      calcularSubtotal();
+    }  
+  });
+});
 
-        if(productoCarrito.currency == "UYU") {
-          productoCarrito.unitCost = (productoCarrito.unitCost / 40).toFixed(0);
-          productoCarrito.currency = "USD";
-        }
+function mostrarCarrito(contenidoCarrito){
+  let listadoProdCarrito = ``;
 
-        document.getElementById("badge").innerHTML = cantidadProdCarrito;
+  for (let i = 0; i < contenidoCarrito.length; i++) {
+    let productoCarrito = contenidoCarrito[i];
+    cantidadProdCarrito = contenidoCarrito.length;
 
-        listadoProdCarrito += ` 
+    if(productoCarrito.currency == "UYU") {
+      productoCarrito.unitCost = (productoCarrito.unitCost / 40).toFixed(0);
+      productoCarrito.currency = "USD";
+    }
+
+    document.getElementById("badge").innerHTML = cantidadProdCarrito;
+
+    listadoProdCarrito += ` 
         <!-- Card -->
           <div class="card-body" id="prodCard${i}">
             <div class="row mb-4">
@@ -58,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                   </div>
                   <div class="d-flex justify-content-between align-items-center">
                     <div>
-                      <a href="#!" onclick="removerProd(this)" data-value="${i}"  type="button"  class="card-link-secondary small text-uppercase mr-3" style="color:#dd2f56">
+                      <a href="#!" onclick="removerProd(this, contenidoCarrito)" data-value="${i}"  type="button"  class="card-link-secondary small text-uppercase mr-3" style="color:#dd2f56">
                       <i class="fas fa-trash-alt mr-1"></i>Remover Producto</a>
                     </div>
                     <p class="mb-0"><span><strong>${productoCarrito.currency}</strong><strong id="precioUnitario${i}"> ${formatNumber(productoCarrito.unitCost)}</strong></span></p>
@@ -69,45 +75,34 @@ document.addEventListener("DOMContentLoaded", function (e) {
             <hr class="mb-4">
           </div>
         <!-- Card -->`
-
-      document.getElementById("listadoCompletoCarrito").innerHTML = listadoProdCarrito;
-
-      var listadoPrecios = "";
-
-      listadoPrecios = `
-          <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-          ${productoCarrito.name} 
-          <span id="costoFinal${[i]}" class="sumaSubtotal">${formatNumber(productoCarrito.unitCost)}</span>
-          </li>
-        `
-      document.getElementById("productoUnitario").innerHTML += listadoPrecios; 
-      }
-      calcularSubtotal();
-    }
-  }); 
-});
+} document.getElementById("listadoCompletoCarrito").innerHTML = listadoProdCarrito;
+}
 
 
-
-/* document.querySelectorAll(".card-link-secondar.small.text-uppercase.mr-3").addEventListener('click', function (e) {
-  alert("hola")
-  console.log(productoABorrar);
-
-});  */
-
-/* function removerProd(producto){
+function removerProd(producto, contenidoCarrito){
   var productoABorrar = producto.dataset.value;
-  contenidoCarrito.splice(productoABorrar,1); console.log(contenidoCarrito)
-} */
+  contenidoCarrito.splice(productoABorrar,1);
+  mostrarCarrito(contenidoCarrito);
+  mostrarTotal(contenidoCarrito);
+  calcularSubtotal();
+}
 
-/* function removerProd(producto, contenido, listadoProductos, listadoMontos){
-  var productoABorrar = producto.dataset.value;
-  contenido.splice(productoABorrar,1);
-  document.getElementById("listadoCompletoCarrito").innerHTML = listadoProductos;
-  document.getElementById("productoUnitario").innerHTML = (listadoMontos); 
-} */
+function mostrarTotal(contenidoCarrito) {
+  var listadoPrecios = "";
 
+  for (let i = 0; i < contenidoCarrito.length; i++) {
+    let productoCarrito = contenidoCarrito[i];
+    cantidadProdCarrito = contenidoCarrito.length;
 
+  listadoPrecios = `
+      <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+      ${productoCarrito.name} 
+      <span id="costoFinal${[i]}" class="sumaSubtotal">${formatNumber(productoCarrito.unitCost)}</span>
+      </li>
+    `
+  document.getElementById("productoUnitario").innerHTML += listadoPrecios; 
+  }
+}
 
 function calcularSubtotal(){
   var prods = document.querySelectorAll("#productoUnitario li span");
@@ -118,7 +113,6 @@ function calcularSubtotal(){
   }
   document.getElementById("subtotal").innerHTML = formatNumber(subtotal);
 }
-
 
 function calcularCantidad(index) {
   var precioUnitario = parseInt(document.getElementById(`precioUnitario${index}`).innerHTML.replace('.', ''));
