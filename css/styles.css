@@ -444,8 +444,5 @@ a:hover.link-olvidaste-contraseña {
   }
   }
 
-  .imagenCarrito {
-    border-radius:5px;
-      /* offset-x | offset-y | blur-radius | spread-radius | color */
-    box-shadow: -1px 1px 1px 1.5px rgba(0, 0, 0, 0.2);
-  }
+
+  
