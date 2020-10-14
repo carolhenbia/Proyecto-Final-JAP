@@ -31,7 +31,7 @@
   </style>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <link href="css/styleProfile.css" href="stylesheet">
+  <!-- <link href="css/styleProfile.css" href="stylesheet"> -->
   <link href="css/dropzone.css" rel="stylesheet">
 </head>
 
@@ -60,19 +60,136 @@
 </div>
 
 <main>
-  <div class="container">
-   
+  <div class="container" id="conPerfil"></div>
+  <div class="container" id="sinPerfil">
+        <form>
+          <h2 style="font-size: 1.3em; text-align: center; margin-bottom: 1.5em;">¡Comienza llenando tu perfil!</h2>
+              <div class="row">
+                <div class="col-lg-6">
+                <div class="md-form md-outline mb-0 mb-lg-4">
+                  <label for="nombres">Nombres</label>
+                  <input type="text" id="nombres" placeholder="Aquí van tus nombres" class="form-control mb-0 mb-lg-2" 
+                  style="margin-bottom:1em !important;" required>            
+                </div>
+              </div>  
+              <div class="col-lg-6">
+                <div class="md-form md-outline mb-0 mb-lg-4">
+                  <label for="apellidos">Apellidos</label>
+                  <input type="text" id="apellidos" placeholder="Aquí van tus apellidos" class="form-control mb-0 mb-lg-2" 
+                  style="margin-bottom:1em !important;" required>            
+                </div>
+              </div>  
+              <div class="col-lg-6">
+                <label>Fecha de nacimiento</label>
+                  <div class="select-outline position-relative w-100">
+                  <input type="date" id="fechaNacimiento" class="form-control mb-0 mb-lg-2" required>        
+                  </div>
+              </div>  
+              <div class="col-lg-6">
+                <div class="md-form md-outline mb-0 mb-lg-4">
+                  <label>Teléfono</label>
+                  <input type="tel" id="telefono" name="telefono" placeholder="Escribelo sin puntos ni guiones: 095666325"
+                  pattern="[0-9]{3}[0-9]{3}[0-9]{3}" class="form-control mb-0 mb-lg-2" required>                  
+                </div>
+              </div>  
+              <div class="col-lg-6">
+                <div class="md-form md-outline mb-0 mb-lg-4">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" placeholder="Ingresa tu email" class="form-control mb-0 mb-lg-2" 
+                  style="margin-bottom:1em !important;" name="email" required>            
+                </div>
+              </div>  
+              <div class="col-lg-6">
+                <label for="zip">Tu foto de perfil</label>
+                <div class="needsclick dz-clickable" id="file-upload">
+                  <div class="dz-message needsclick">
+                    Arrastra tus fotos aquí<br>
+                  </div>
+                </div>
+              </div>   
+            </div>  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Más tarde</button>
+              <button type="submit" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales()">Listo</button>
+            </div>
+          </form>
   </div>
 </main>
 
-
- 
-  <footer class="text-muted bg-light">
-    <div class="container">
-      <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+<!-- <main>
+  <div class="container">
+    <input type="button" id="faltaMetodo" data-toggle="modal" data-target="#datosPersonalesVacio"></input>
+    <div class="modal fade" id="datosPersonalesVacio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <form>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">¡Antes de empezar, ingresa tus datos personales!</h5>
+          </div>
+          <div class="modal-body">
+            
+              <div class="row">
+              <div class="col-lg-6">
+                <div class="md-form md-outline mb-0 mb-lg-4">
+                  <label for="nombres">Nombres</label>
+                  <input type="text" id="nombres" placeholder="Aquí van tus nombres" class="form-control mb-0 mb-lg-2" 
+                  style="margin-bottom:1em !important;" required>            
+                </div>
+              </div>  
+              <div class="col-lg-6">
+                <div class="md-form md-outline mb-0 mb-lg-4">
+                  <label for="apellidos">Apellidos</label>
+                  <input type="text" id="apellidos" placeholder="Aquí van tus apellidos" class="form-control mb-0 mb-lg-2" 
+                  style="margin-bottom:1em !important;" required>            
+                </div>
+              </div>  
+              <div class="col-lg-6">
+                <label>Fecha de nacimiento</label>
+                  <div class="select-outline position-relative w-100">
+                  <input type="date" id="fechaNacimiento" class="form-control mb-0 mb-lg-2" required>        
+                  </div>
+              </div>  
+              <div class="col-lg-6">
+                <div class="md-form md-outline mb-0 mb-lg-4">
+                  <label>Teléfono</label>
+                  <input type="tel" id="telefono" name="telefono" 
+                  pattern="[0-9]{3}[0-9]{3}[0-9]{3}" class="form-control mb-0 mb-lg-2" required>                  
+                </div>
+              </div>  
+              <div class="col-lg-6">
+                <div class="md-form md-outline mb-0 mb-lg-4">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" placeholder="Ingresa tu email" class="form-control mb-0 mb-lg-2" 
+                  style="margin-bottom:1em !important;" name="email" required>            
+                </div>
+              </div>  
+              <div class="col-lg-6">
+                <label for="zip">Tu foto de perfil</label>
+                <div class="needsclick dz-clickable" id="file-upload">
+                  <div class="dz-message needsclick">
+                    Arrastra tus fotos aquí<br>
+                  </div>
+                </div>
+              </div>   
+            </div>  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Más tarde</button>
+              <button type="submit" class="btn btn-primary btn-comprar" onsubmit="agregarDatosPersonales()">Listo</button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
+  </div>
+</main> -->
+
+<footer class="text-muted bg-light">
+  <div class="container">
+    <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
+    <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+  </div>
+</footer>
   <div class="alert fade alert-success" role="alert" id="alertResult">
     <span id="resultSpan"></span>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -92,6 +209,7 @@
   <script src="js/dropzone.js"></script>
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>
+  <script src="js/sell.js"></script>
   <script src="js/index.js"></script>
 </body>
 
