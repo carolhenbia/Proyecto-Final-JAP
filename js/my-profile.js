@@ -34,13 +34,13 @@ var contenidoMiPerfil = {};
 
 document.addEventListener("DOMContentLoaded", function (e) {
     contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales"));   
-    console.log(contenidoMiPerfil);
+    console.log({contenidoMiPerfil});
 });
 
-document.addEventListener("DOMContentLoaded", function mostrarMiPerfil(contenidoMiPerfil) {
+document.addEventListener("DOMContentLoaded", function mostrarMiPerfil(e) {
     let miPerfil = "";
     if (contenidoMiPerfil != undefined){
-        miPerfil = `<h1>${contenidoMiPerfil['nombres']}</h1> 
+        miPerfil = `<h1>${contenidoMiPerfil.nombres}</h1> 
         `
     document.getElementById("conPerfil").innerHTML = miPerfil; 
     console.log(contenidoMiPerfil);   
