@@ -7,14 +7,16 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 
 var datosPersonales = {};
-var nombresUsuario = document.getElementById("nombres");
-var apellidosUsuario = document.getElementById("apellidos");
-var edad = document.getElementById("fechaNacimiento");
-var telefonoUsuario = document.getElementById("telefono");
-var emailUsuario = document.getElementById("email");
 
-function agregarDatosPersonales() {
-    
+
+function agregarDatosPersonales(e) {
+  e.preventDefault();
+  var nombresUsuario = document.getElementById("nombres");
+  var apellidosUsuario = document.getElementById("apellidos");
+  var edad = document.getElementById("fechaNacimiento");
+  var telefonoUsuario = document.getElementById("telefono");
+  var emailUsuario = document.getElementById("email");
+
     if (nombresUsuario.value != "" && apellidosUsuario.value != ""
         && edad.value != "" && telefonoUsuario.value != "" && emailUsuario.value != "") {
         var datosPersonales = {
@@ -25,24 +27,87 @@ function agregarDatosPersonales() {
             email: emailUsuario.value
         };
         localStorage.setItem("datosPersonales", JSON.stringify(datosPersonales));
-        alert("agregueDatos")
-        console.log(datosPersonales)
+        renderProfile();
     } 
 }
 
-var contenidoMiPerfil = {};
-
-document.addEventListener("DOMContentLoaded", function (e) {
-    contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales"));
-    console.log({ contenidoMiPerfil });
+document.addEventListener("DOMContentLoaded", function mostrarMiPerfil(e) {
+  renderProfile();
 });
 
-document.addEventListener("DOMContentLoaded", function mostrarMiPerfil(e) {
-    let miPerfil = "";
-    if (contenidoMiPerfil === null) {
-        document.getElementById("sinPerfil").innerHTML = ('afterend', `<div style="display:contents;" class="modal fade" id="datosPersonalesVacio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+function clickModificar(){
+  renderProfile(true); //manda un true al renderProfile
+}
+
+function renderProfile(showForm=false){
+  var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales"));
+  let miPerfil = "";
+  if(contenidoMiPerfil != null && showForm){//si el contenido no es nulo y el showform es true
+    document.getElementById("perfil").innerHTML = ('afterend', `
+        <div style="display:contents;" class="modal fade" id="datosPersonalesVacio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-    <form>
+    <form >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">¡Antes de empezar, ingresa tus datos personales!</h5>
+      </div>
+      <div class="modal-body">
+        
+          <div class="row">
+          <div class="col-lg-6">
+            <div class="md-form md-outline mb-0 mb-lg-4">
+              <label for="nombres">Nombres</label>
+              <input type="text" value="${contenidoMiPerfil.nombres}" id="nombres" placeholder="Aquí van tus nombres" class="form-control mb-0 mb-lg-2" 
+              style="margin-bottom:1em !important;" required>            
+            </div>
+          </div>  
+          <div class="col-lg-6">
+            <div class="md-form md-outline mb-0 mb-lg-4">
+              <label for="apellidos">Apellidos</label>
+              <input type="text" id="apellidos" placeholder="Aquí van tus apellidos" class="form-control mb-0 mb-lg-2" 
+              style="margin-bottom:1em !important;" required>            
+            </div>
+          </div>  
+          <div class="col-lg-6">
+            <label>Fecha de nacimiento</label>
+              <div class="select-outline position-relative w-100">
+              <input type="date" id="fechaNacimiento" class="form-control mb-0 mb-lg-2" required>        
+              </div>
+          </div>  
+          <div class="col-lg-6">
+            <div class="md-form md-outline mb-0 mb-lg-4">
+              <label>Teléfono</label>
+              <input type="tel" id="telefono" name="telefono" 
+              pattern="[0-9]{3}[0-9]{3}[0-9]{3}" class="form-control mb-0 mb-lg-2" required>                  
+            </div>
+          </div>  
+          <div class="col-lg-6">
+            <div class="md-form md-outline mb-0 mb-lg-4">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="Ingresa tu email" class="form-control mb-0 mb-lg-2" 
+              style="margin-bottom:1em !important;" name="email" required>            
+            </div>
+          </div>  
+          <div class="col-lg-6">
+            <label for="zip">Tu foto de perfil</label>
+            <div class="needsclick dz-clickable" id="file-upload">
+              <div class="dz-message needsclick">
+                Arrastra tus fotos aquí<br>
+              </div>
+            </div>
+          </div>   
+        </div>  
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales(event)">Listo</button>
+        </div>
+      </form>
+      </div>
+      </div>` )
+  } else if (contenidoMiPerfil === null) { //si no hay nada en el local storage
+        document.getElementById("sinPerfil").innerHTML = ('afterend', `
+        <div style="display:contents;" class="modal fade" id="datosPersonalesVacio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+    <form >
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">¡Antes de empezar, ingresa tus datos personales!</h5>
@@ -94,10 +159,13 @@ document.addEventListener("DOMContentLoaded", function mostrarMiPerfil(e) {
           </div>   
         </div>  
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales()">Listo</button>
+          <button type="submit" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales(event)">Listo</button>
         </div>
-      </form>` )
-    } else {
+      </form>
+      </div>
+      </div>` )
+      
+    } else { //si el local storage esta lleno
         miPerfil = ` <section class="intro-section">
     <div class="container">
       <div class="row">
@@ -123,21 +191,17 @@ document.addEventListener("DOMContentLoaded", function mostrarMiPerfil(e) {
             </li>
           </ul>
           </div>
+          <div class="modal-footer">
+          <button class="btn btn-primary btn-comprar" onclick="clickModificar()">Modificar</button>
+        </div>
         </div>
       </div>
     </div>
     </section>
     `
-        nombresUsuario.value = contenidoMiPerfil.nombres;
-        apellidosUsuario.value = contenidoMiPerfil.apellidos;
-        edad.value = contenidoMiPerfil.edad;
-        telefonoUsuario.value = contenidoMiPerfil.telefono;
-        emailUsuario.value = contenidoMiPerfil.email;
-
-        document.getElementById("perfil").innerHTML = miPerfil;
-        console.log(contenidoMiPerfil); 
+    document.getElementById("perfil").innerHTML = miPerfil;
     }
-});
+}
 
 
 //función que obtiene la fecha al momento de hacer el comentario y la formatea de a misma forma que el resto de comentarios
@@ -150,12 +214,13 @@ var fechaHoy = nuevaFecha.getFullYear() + "-" + mes + "-" + dia;
 var hora = nuevaFecha.getHours() + ":" + nuevaFecha.getMinutes() + ":" + nuevaFecha.getSeconds();
 
 function calcularEdad() {
+    var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales"));
     var arrayFecha = contenidoMiPerfil.edad.split("-");
     var añoFecha = arrayFecha[0];
     var añoNacimiento = nuevaFecha.getFullYear() - añoFecha;
     console.log(añoNacimiento)
     return añoNacimiento
-} calcularEdad();
+}
 
 
 
