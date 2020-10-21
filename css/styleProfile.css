@@ -78,7 +78,7 @@ ul {
   position: relative;
   background-size: cover;
   z-index: 1;
-  background-image: url("../img/cover_back_2.png");
+  background-image: url("../img/portada-mi-perfil2.jpg");
 }
 
 .intro-section:before {
@@ -101,4 +101,22 @@ ul {
   height: 150px;
   z-index: -1;
   background: #fff;
+}
+
+.is-invalid{
+  border-color: red;
+  background-color: white;
+}
+
+.is-valid{
+  border-color: green;
+  background-color: white;
+}
+
+.valido{
+  color: green;
+}
+
+.invalido{
+  color: red;
 }

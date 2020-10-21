@@ -29,6 +29,8 @@ function agregarDatosPersonales(e) {
         localStorage.setItem("datosPersonales", JSON.stringify(datosPersonales));
         renderProfile();
     } 
+    var formularioInicial = document.getElementById("formInicial");
+    formularioInicial.classList.add("was-validated");   
 }
 
 document.addEventListener("DOMContentLoaded", function mostrarMiPerfil(e) {
@@ -37,6 +39,8 @@ document.addEventListener("DOMContentLoaded", function mostrarMiPerfil(e) {
 
 function clickModificar(){
   renderProfile(true); //manda un true al renderProfile
+  var formularioModificar = document.getElementById("modificarForm");
+  formularioModificar.classList.add("was-validated");
 }
 
 function renderProfile(showForm=false){
@@ -46,45 +50,48 @@ function renderProfile(showForm=false){
     document.getElementById("perfil").innerHTML = ('afterend', `
         <div style="display:contents;" class="modal fade" id="datosPersonalesVacio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-    <form >
+    <form id="modificarForm">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">¡Antes de empezar, ingresa tus datos personales!</h5>
+        <h5 class="modal-title" id="exampleModalLabel">¡Modifica lo que desees!</h5>
       </div>
       <div class="modal-body">
         
           <div class="row">
           <div class="col-lg-6">
-            <div class="md-form md-outline mb-0 mb-lg-4">
+            <div class="md-form md-outline mb-0 mb-lg-4 form-group">
               <label for="nombres">Nombres</label>
               <input type="text" value="${contenidoMiPerfil.nombres}" id="nombres" placeholder="Aquí van tus nombres" class="form-control mb-0 mb-lg-2" 
-              style="margin-bottom:1em !important;" required>            
+              style="margin-bottom:1em !important;" required>     
+              <div class="invalid-feedback">Falta ingresar tu nombre.</div>
+              <div class="valid-feedback">¡Genial!</div>          
             </div>
           </div>  
           <div class="col-lg-6">
             <div class="md-form md-outline mb-0 mb-lg-4">
               <label for="apellidos">Apellidos</label>
-              <input type="text" id="apellidos" placeholder="Aquí van tus apellidos" class="form-control mb-0 mb-lg-2" 
+              <input type="text" value="${contenidoMiPerfil.apellidos}" id="apellidos" placeholder="Aquí van tus apellidos" class="form-control mb-0 mb-lg-2" 
               style="margin-bottom:1em !important;" required>            
             </div>
           </div>  
           <div class="col-lg-6">
             <label>Fecha de nacimiento</label>
               <div class="select-outline position-relative w-100">
-              <input type="date" id="fechaNacimiento" class="form-control mb-0 mb-lg-2" required>        
+              <input type="date" id="fechaNacimiento"  value="${contenidoMiPerfil.edad}" class="form-control mb-0 mb-lg-2" required>        
               </div>
           </div>  
           <div class="col-lg-6">
             <div class="md-form md-outline mb-0 mb-lg-4">
               <label>Teléfono</label>
-              <input type="tel" id="telefono" name="telefono" 
+              <input type="tel" id="telefono" name="telefono" value="${contenidoMiPerfil.telefono}"
               pattern="[0-9]{3}[0-9]{3}[0-9]{3}" class="form-control mb-0 mb-lg-2" required>                  
             </div>
           </div>  
           <div class="col-lg-6">
             <div class="md-form md-outline mb-0 mb-lg-4">
               <label for="email">Email</label>
-              <input type="email" id="email" placeholder="Ingresa tu email" class="form-control mb-0 mb-lg-2" 
+              <input type="email" id="email" placeholder="Ingresa tu email" class="form-control mb-0 mb-lg-2"
+              value="${contenidoMiPerfil.email}" 
               style="margin-bottom:1em !important;" name="email" required>            
             </div>
           </div>  
@@ -98,7 +105,7 @@ function renderProfile(showForm=false){
           </div>   
         </div>  
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales(event)">Listo</button>
+          <button type="submit" id="comprobarModificaciones" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales(event)">Listo</button>
         </div>
       </form>
       </div>
@@ -107,7 +114,7 @@ function renderProfile(showForm=false){
         document.getElementById("sinPerfil").innerHTML = ('afterend', `
         <div style="display:contents;" class="modal fade" id="datosPersonalesVacio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-    <form >
+    <form id="formInicial">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">¡Antes de empezar, ingresa tus datos personales!</h5>
@@ -116,37 +123,47 @@ function renderProfile(showForm=false){
         
           <div class="row">
           <div class="col-lg-6">
-            <div class="md-form md-outline mb-0 mb-lg-4">
+            <div class="md-form md-outline mb-0 mb-lg-4 form-group">
               <label for="nombres">Nombres</label>
               <input type="text" id="nombres" placeholder="Aquí van tus nombres" class="form-control mb-0 mb-lg-2" 
-              style="margin-bottom:1em !important;" required>            
+              style="margin-bottom:1em !important;" required> <span id="cheque"></span>       
+              <div class="invalid-feedback">Falta ingresar tu nombre.</div>
+              <div class="valid-feedback">¡Genial!</div>     
             </div>
           </div>  
           <div class="col-lg-6">
             <div class="md-form md-outline mb-0 mb-lg-4">
               <label for="apellidos">Apellidos</label>
               <input type="text" id="apellidos" placeholder="Aquí van tus apellidos" class="form-control mb-0 mb-lg-2" 
-              style="margin-bottom:1em !important;" required>            
+              style="margin-bottom:1em !important;" required>    
+              <div class="invalid-feedback">Falta ingresar tu apellido.</div>
+              <div class="valid-feedback">¡Genial!</div>            
             </div>
           </div>  
           <div class="col-lg-6">
             <label>Fecha de nacimiento</label>
               <div class="select-outline position-relative w-100">
-              <input type="date" id="fechaNacimiento" class="form-control mb-0 mb-lg-2" required>        
+              <input type="date" id="fechaNacimiento" class="form-control mb-0 mb-lg-2" required>   
+              <div class="invalid-feedback">Falta ingresar tu fecha de nacimiento.</div>
+              <div class="valid-feedback">¡Genial!</div>       
               </div>
           </div>  
           <div class="col-lg-6">
             <div class="md-form md-outline mb-0 mb-lg-4">
               <label>Teléfono</label>
-              <input type="tel" id="telefono" name="telefono" 
-              pattern="[0-9]{3}[0-9]{3}[0-9]{3}" class="form-control mb-0 mb-lg-2" required>                  
+              <input type="tel" id="telefono" name="telefono" placeholder="Formato: 094256365"
+              pattern="[0-9]{3}[0-9]{3}[0-9]{3}" class="form-control mb-0 mb-lg-2" required> 
+              <div class="invalid-feedback">Falta ingresar tu teléfono.</div>
+              <div class="valid-feedback">¡Genial!</div>                   
             </div>
           </div>  
           <div class="col-lg-6">
             <div class="md-form md-outline mb-0 mb-lg-4">
               <label for="email">Email</label>
               <input type="email" id="email" placeholder="Ingresa tu email" class="form-control mb-0 mb-lg-2" 
-              style="margin-bottom:1em !important;" name="email" required>            
+              style="margin-bottom:1em !important;" name="email" required>   
+              <div class="invalid-feedback">Falta ingresar tu email.</div>
+              <div class="valid-feedback">¡Genial!</div>           
             </div>
           </div>  
           <div class="col-lg-6">
@@ -159,7 +176,7 @@ function renderProfile(showForm=false){
           </div>   
         </div>  
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales(event)">Listo</button>
+          <button type="submit" id="comprobarDatos" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales(event)">Listo</button>
         </div>
       </form>
       </div>
@@ -223,7 +240,66 @@ function calcularEdad() {
 }
 
 
+document.getElementById("comprobarDatos").addEventListener("submit", function(){
+  var nombresUsuario = document.getElementById("nombres");
+  var chequeCruz = document.getElementById("cheque");
 
+  nombresUsuario.classList.remove('is-invalid');
+  nombresUsuario.classList.remove('is-valid');
+  chequeCruz.classList.remove('invalido');
+  chequeCruz.classList.remove('valido');
+
+  if (nombresUsuario.value === ""){
+    nombresUsuario.classList.add('is-invalid');
+    chequeCruz.classList.add('invalido');
+  } else {
+    nombresUsuario.classList.add('is-valid');
+    chequeCruz.classList.add('valido');
+  }
+})
+
+document.getElementById("comprobarModificaciones").addEventListener("submit", function(){
+  var nombresUsuario = document.getElementById("nombres");
+  var chequeCruz = document.getElementById("cheque");
+
+  nombresUsuario.classList.remove('is-invalid');
+  nombresUsuario.classList.remove('is-valid');
+  chequeCruz.classList.remove('invalido');
+  chequeCruz.classList.remove('valido');
+
+  if (nombresUsuario.value === ""){
+    nombresUsuario.classList.add('is-invalid');
+    chequeCruz.classList.add('invalido');
+  } else {
+    nombresUsuario.classList.add('is-valid');
+    chequeCruz.classList.add('valido');
+  }
+})
+
+
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Get the forms we want to add validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})(); 
+
+/* var nombresUsuario = document.getElementById("nombres");
+  var apellidosUsuario = document.getElementById("apellidos");
+  var edad = document.getElementById("fechaNacimiento");
+  var telefonoUsuario = document.getElementById("telefono");
+  var emailUsuario = document.getElementById("email"); */
 
 
 
