@@ -17,36 +17,59 @@ function agregarDatosPersonales(e) {
   var telefonoUsuario = document.getElementById("telefono");
   var emailUsuario = document.getElementById("email");
 
-    if (nombresUsuario.value != "" && apellidosUsuario.value != ""
-        && edad.value != "" && telefonoUsuario.value != "" && emailUsuario.value != "") {
-        var datosPersonales = {
-            nombres: nombresUsuario.value,
-            apellidos: apellidosUsuario.value,
-            edad: edad.value,
-            telefono: telefonoUsuario.value,
-            email: emailUsuario.value
-        };
-        localStorage.setItem("datosPersonales", JSON.stringify(datosPersonales));
-        renderProfile();
-    } 
-    var formularioInicial = document.getElementById("formInicial");
-    formularioInicial.classList.add("was-validated");   
+  if (nombresUsuario.value != "" && apellidosUsuario.value != ""
+    && edad.value != "" && telefonoUsuario.value != "" && emailUsuario.value != "") {
+    var datosPersonales = {
+      nombres: nombresUsuario.value,
+      apellidos: apellidosUsuario.value,
+      edad: edad.value,
+      telefono: telefonoUsuario.value,
+      email: emailUsuario.value
+    };
+    localStorage.setItem("datosPersonales", JSON.stringify(datosPersonales));
+    renderProfile();
+  }
+  var formularioInicial = document.getElementById("formInicial");
+  formularioInicial.classList.add("was-validated");
 }
 
 document.addEventListener("DOMContentLoaded", function mostrarMiPerfil(e) {
   renderProfile();
 });
 
-function clickModificar(){
+function clickModificar() {
   renderProfile(true); //manda un true al renderProfile
   var formularioModificar = document.getElementById("modificarForm");
   formularioModificar.classList.add("was-validated");
 }
 
-function renderProfile(showForm=false){
-  var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales"));
+
+var contenidoCarrito = [];
+var productoCarrito = [];
+
+/* document.addEventListener("DOMContentLoaded", function (e) {
+  getJSONData(CART_PRODUCTS).then(function (result){
+    if (result.status === "ok"){
+      contenidoCarrito = result.data.articles;   
+      for (let i = 0; i < contenidoCarrito.length; i++) {
+      let productoCarrito = contenidoCarrito[i];
+      cantidadProdCarrito = contenidoCarrito.length;
+      
+      if(productoCarrito.currency == "UYU") {
+        productoCarrito.unitCost = (productoCarrito.unitCost / 40).toFixed(0);
+        productoCarrito.currency = "USD";
+      }
+      }
+    }  
+  });
+}); */
+
+
+
+function renderProfile(showForm = false) {
+  var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales"));  
   let miPerfil = "";
-  if(contenidoMiPerfil != null && showForm){//si el contenido no es nulo y el showform es true
+  if (contenidoMiPerfil != null && showForm) {//si el contenido no es nulo y el showform es true
     document.getElementById("perfil").innerHTML = ('afterend', `
         <div style="display:contents;" class="modal fade" id="datosPersonalesVacio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -71,20 +94,26 @@ function renderProfile(showForm=false){
             <div class="md-form md-outline mb-0 mb-lg-4">
               <label for="apellidos">Apellidos</label>
               <input type="text" value="${contenidoMiPerfil.apellidos}" id="apellidos" placeholder="Aquí van tus apellidos" class="form-control mb-0 mb-lg-2" 
-              style="margin-bottom:1em !important;" required>            
+              style="margin-bottom:1em !important;" required>   
+              <div class="invalid-feedback">Falta ingresar tu apellido.</div>
+              <div class="valid-feedback">¡Genial!</div>              
             </div>
           </div>  
           <div class="col-lg-6">
             <label>Fecha de nacimiento</label>
               <div class="select-outline position-relative w-100">
               <input type="date" id="fechaNacimiento"  value="${contenidoMiPerfil.edad}" class="form-control mb-0 mb-lg-2" required>        
+              <div class="invalid-feedback">Falta ingresar tu fecha de nacimiento.</div>
+              <div class="valid-feedback">¡Genial!</div> 
               </div>
           </div>  
           <div class="col-lg-6">
             <div class="md-form md-outline mb-0 mb-lg-4">
               <label>Teléfono</label>
               <input type="tel" id="telefono" name="telefono" value="${contenidoMiPerfil.telefono}"
-              pattern="[0-9]{3}[0-9]{3}[0-9]{3}" class="form-control mb-0 mb-lg-2" required>                  
+              pattern="[0-9]{3}[0-9]{3}[0-9]{3}" class="form-control mb-0 mb-lg-2" required>  
+              <div class="invalid-feedback">Falta ingresar tu teléfono.</div>
+              <div class="valid-feedback">¡Genial!</div>                    
             </div>
           </div>  
           <div class="col-lg-6">
@@ -92,7 +121,9 @@ function renderProfile(showForm=false){
               <label for="email">Email</label>
               <input type="email" id="email" placeholder="Ingresa tu email" class="form-control mb-0 mb-lg-2"
               value="${contenidoMiPerfil.email}" 
-              style="margin-bottom:1em !important;" name="email" required>            
+              style="margin-bottom:1em !important;" name="email" required>   
+              <div class="invalid-feedback">Falta ingresar tu email.</div>
+              <div class="valid-feedback">¡Genial!</div>           
             </div>
           </div>  
           <div class="col-lg-6">
@@ -111,7 +142,7 @@ function renderProfile(showForm=false){
       </div>
       </div>` )
   } else if (contenidoMiPerfil === null) { //si no hay nada en el local storage
-        document.getElementById("sinPerfil").innerHTML = ('afterend', `
+    document.getElementById("sinPerfil").innerHTML = (`
         <div style="display:contents;" class="modal fade" id="datosPersonalesVacio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
     <form id="formInicial">
@@ -120,7 +151,6 @@ function renderProfile(showForm=false){
         <h5 class="modal-title" id="exampleModalLabel">¡Antes de empezar, ingresa tus datos personales!</h5>
       </div>
       <div class="modal-body">
-        
           <div class="row">
           <div class="col-lg-6">
             <div class="md-form md-outline mb-0 mb-lg-4 form-group">
@@ -181,9 +211,9 @@ function renderProfile(showForm=false){
       </form>
       </div>
       </div>` )
-      
-    } else { //si el local storage esta lleno
-        miPerfil = ` <section class="intro-section">
+
+  } else { //si el local storage esta lleno
+    miPerfil = ` <section class="intro-section">
     <div class="container">
       <div class="row">
         <div class="col-md-1 col-lg-2"></div>
@@ -214,11 +244,54 @@ function renderProfile(showForm=false){
         </div>
       </div>
     </div>
-    </section>
-    `
+    </section> <div class="container"> <div class="row" style="justify-content:center"> <h3 style="margin-top:0.5em; margin-bottom:1em">Mira los productos que compraste:</h3></div>
+    <div class="row" id="productosComprados"></div></div>`
+    
     document.getElementById("perfil").innerHTML = miPerfil;
-    }
+    
+    var contenidoCarrito = JSON.parse(localStorage.getItem("contenidoCarrito"));
+    for (let i = 0; i < contenidoCarrito.length; i++) {
+    let productoCarrito = contenidoCarrito[i];
+    cantidadProdCarrito = contenidoCarrito.length;
+
+    console.log(contenidoCarrito)
+    
+    if(productoCarrito.currency == "UYU") {
+      productoCarrito.unitCost = (productoCarrito.unitCost / 40).toFixed(0);
+      productoCarrito.currency = "USD";
+      }
+    
+    document.getElementById("productosComprados").innerHTML += (`
+      <div class="col-sm-4">
+      <div class="card mb-4 shadow-sm">
+      <img class="bd-placeholder-img card-img-top" width="100%" height="250" 
+      src="${productoCarrito.src}"></img>
+      <div class="card-body">
+        <p class="card-text">${productoCarrito.name}</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <small class="text-muted">${productoCarrito.currency} ${productoCarrito.unitCost}</small>
+        </div>
+      </div>
+    </div>
+      `)
+    } 
+
+    } 
 }
+
+
+{/* <div class="btn-group">
+<button type="button" class="btn btn-sm btn-outline-secondary">Volver a comprar</button>
+</div> */}
+
+/* function volverAComprar(producto){
+  var contenidoCarrito = JSON.parse(localStorage.getItem("contenidoCarrito"));
+  var productoASumar = producto.dataset.value; console.log(productoASumar);
+  contenidoCarrito.push(productoASumar);
+  console.log(contenidoCarrito);
+}
+ */
+
 
 
 //función que obtiene la fecha al momento de hacer el comentario y la formatea de a misma forma que el resto de comentarios
@@ -231,16 +304,15 @@ var fechaHoy = nuevaFecha.getFullYear() + "-" + mes + "-" + dia;
 var hora = nuevaFecha.getHours() + ":" + nuevaFecha.getMinutes() + ":" + nuevaFecha.getSeconds();
 
 function calcularEdad() {
-    var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales"));
-    var arrayFecha = contenidoMiPerfil.edad.split("-");
-    var añoFecha = arrayFecha[0];
-    var añoNacimiento = nuevaFecha.getFullYear() - añoFecha;
-    console.log(añoNacimiento)
-    return añoNacimiento
+  var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales"));
+  var arrayFecha = contenidoMiPerfil.edad.split("-");
+  var añoFecha = arrayFecha[0];
+  var añoNacimiento = nuevaFecha.getFullYear() - añoFecha;
+  return añoNacimiento
 }
 
 
-document.getElementById("comprobarDatos").addEventListener("submit", function(){
+document.getElementById("comprobarDatos").addEventListener("submit", function () {
   var nombresUsuario = document.getElementById("nombres");
   var chequeCruz = document.getElementById("cheque");
 
@@ -249,7 +321,7 @@ document.getElementById("comprobarDatos").addEventListener("submit", function(){
   chequeCruz.classList.remove('invalido');
   chequeCruz.classList.remove('valido');
 
-  if (nombresUsuario.value === ""){
+  if (nombresUsuario.value === "") {
     nombresUsuario.classList.add('is-invalid');
     chequeCruz.classList.add('invalido');
   } else {
@@ -258,7 +330,7 @@ document.getElementById("comprobarDatos").addEventListener("submit", function(){
   }
 })
 
-document.getElementById("comprobarModificaciones").addEventListener("submit", function(){
+document.getElementById("comprobarModificaciones").addEventListener("submit", function () {
   var nombresUsuario = document.getElementById("nombres");
   var chequeCruz = document.getElementById("cheque");
 
@@ -267,7 +339,7 @@ document.getElementById("comprobarModificaciones").addEventListener("submit", fu
   chequeCruz.classList.remove('invalido');
   chequeCruz.classList.remove('valido');
 
-  if (nombresUsuario.value === ""){
+  if (nombresUsuario.value === "") {
     nombresUsuario.classList.add('is-invalid');
     chequeCruz.classList.add('invalido');
   } else {
@@ -277,23 +349,23 @@ document.getElementById("comprobarModificaciones").addEventListener("submit", fu
 })
 
 
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Get the forms we want to add validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})(); 
+  (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+      // Get the forms we want to add validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
 
 /* var nombresUsuario = document.getElementById("nombres");
   var apellidosUsuario = document.getElementById("apellidos");

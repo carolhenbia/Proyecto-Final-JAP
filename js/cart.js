@@ -17,9 +17,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
       mostrarCarrito(contenidoCarrito);
       mostrarTotal(contenidoCarrito);
       calcularSubtotal();
+      localStorage.setItem("contenidoCarrito", JSON.stringify(contenidoCarrito));
+      console.log(localStorage)
     }  
   });
 }); //funcion que llama los datos del json y ejecuta las funciones iniciales
+
+
 
 function mostrarCarrito(contenidoCarrito){
   let listadoProdCarrito = ``;
