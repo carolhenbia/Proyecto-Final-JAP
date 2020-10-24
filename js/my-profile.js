@@ -68,7 +68,6 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
         <h5 class="modal-title" id="exampleModalLabel">¡Modifica lo que desees!</h5>
       </div>
       <div class="modal-body">
-        
           <div class="row">
           <div class="col-lg-6">
             <div class="md-form md-outline mb-0 mb-lg-4 form-group">
@@ -76,7 +75,7 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
               <input type="text" value="${contenidoMiPerfil.nombres}" id="nombres" placeholder="Aquí van tus nombres" class="form-control mb-0 mb-lg-2" 
               style="margin-bottom:1em !important;" required>     
               <div class="invalid-feedback">Falta ingresar tu nombre.</div>
-              <div class="valid-feedback">¡Genial!</div>          
+              <div class="valid-feedback">¡Listo!</div>          
             </div>
           </div>  
           <div class="col-lg-6">
@@ -85,7 +84,7 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
               <input type="text" value="${contenidoMiPerfil.apellidos}" id="apellidos" placeholder="Aquí van tus apellidos" class="form-control mb-0 mb-lg-2" 
               style="margin-bottom:1em !important;" required>   
               <div class="invalid-feedback">Falta ingresar tu apellido.</div>
-              <div class="valid-feedback">¡Genial!</div>              
+              <div class="valid-feedback">¡Listo!</div>              
             </div>
           </div>  
           <div class="col-lg-6">
@@ -93,7 +92,7 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
               <div class="select-outline position-relative w-100">
               <input type="date" id="fechaNacimiento"  value="${contenidoMiPerfil.edad}" class="form-control mb-0 mb-lg-2" required>        
               <div class="invalid-feedback">Falta ingresar tu fecha de nacimiento.</div>
-              <div class="valid-feedback">¡Genial!</div> 
+              <div class="valid-feedback">¡Listo!</div> 
               </div>
           </div>  
           <div class="col-lg-6">
@@ -102,7 +101,7 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
               <input type="tel" id="telefono" name="telefono" value="${contenidoMiPerfil.telefono}"
               pattern="[0-9]{3}[0-9]{3}[0-9]{3}" class="form-control mb-0 mb-lg-2" required>  
               <div class="invalid-feedback">Falta ingresar tu teléfono.</div>
-              <div class="valid-feedback">¡Genial!</div>                    
+              <div class="valid-feedback">¡Listo!</div>                    
             </div>
           </div>  
           <div class="col-lg-6">
@@ -112,7 +111,7 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
               value="${contenidoMiPerfil.email}" 
               style="margin-bottom:1em !important;" name="email" required>   
               <div class="invalid-feedback">Falta ingresar tu email.</div>
-              <div class="valid-feedback">¡Genial!</div>           
+              <div class="valid-feedback">¡Listo!</div>           
             </div>
           </div>   
         </div>  
