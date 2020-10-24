@@ -8,15 +8,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 var datosPersonales = {};
 
-
-function agregarDatosPersonales(e) {
-  e.preventDefault();
+function agregarDatosPersonales(e) {  //agarra los valores en el form y los convierte en un objeto
   var nombresUsuario = document.getElementById("nombres");
   var apellidosUsuario = document.getElementById("apellidos");
   var edad = document.getElementById("fechaNacimiento");
   var telefonoUsuario = document.getElementById("telefono");
   var emailUsuario = document.getElementById("email");
-
+  
   if (nombresUsuario.value != "" && apellidosUsuario.value != ""
     && edad.value != "" && telefonoUsuario.value != "" && emailUsuario.value != "") {
     var datosPersonales = {
@@ -24,52 +22,43 @@ function agregarDatosPersonales(e) {
       apellidos: apellidosUsuario.value,
       edad: edad.value,
       telefono: telefonoUsuario.value,
-      email: emailUsuario.value
+      email: emailUsuario.value,
+      imagen: "https://i.ibb.co/rk9n6Mw/Whats-App-Image-2020-10-24-at-4-51-30-PM.jpg"
     };
     localStorage.setItem("datosPersonales", JSON.stringify(datosPersonales));
-    renderProfile();
+    cargarProfile();
   }
   var formularioInicial = document.getElementById("formInicial");
-  formularioInicial.classList.add("was-validated");
+  formularioInicial.classList.add("was-validated"); //al hacer click en form inicial, cambia la clase de los campos
+  //para que aparezca el respectivo equis o cheque de campos faltantes
 }
 
 document.addEventListener("DOMContentLoaded", function mostrarMiPerfil(e) {
-  renderProfile();
+  cargarProfile();
 });
 
 function clickModificar() {
-  renderProfile(true); //manda un true al renderProfile
+  cargarProfile(true); //manda un true al cargarProfile para poder modificar el perfil
   var formularioModificar = document.getElementById("modificarForm");
   formularioModificar.classList.add("was-validated");
+  //cambia la clase de los campos
+  //para que aparezca el respectivo equis o cheque de campos faltantes
 }
 
 
 var contenidoCarrito = [];
 var productoCarrito = [];
 
-/* document.addEventListener("DOMContentLoaded", function (e) {
-  getJSONData(CART_PRODUCTS).then(function (result){
-    if (result.status === "ok"){
-      contenidoCarrito = result.data.articles;   
-      for (let i = 0; i < contenidoCarrito.length; i++) {
-      let productoCarrito = contenidoCarrito[i];
-      cantidadProdCarrito = contenidoCarrito.length;
-      
-      if(productoCarrito.currency == "UYU") {
-        productoCarrito.unitCost = (productoCarrito.unitCost / 40).toFixed(0);
-        productoCarrito.currency = "USD";
-      }
-      }
-    }  
-  });
-}); */
-
-
-
-function renderProfile(showForm = false) {
-  var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales"));  
+function cargarProfile(showForm = false) { //inicialmente se le manda un "false" para que solo sea "true" al modificar
+  /*tiene 3 condicionales para mostrar o no el profile:
+  1. Para modificar: si hay contenido en el local storage y se le envia un showform "true" como parametro
+  2. Formulario inicial: si el local storage está vacío
+  3. Mostrar perfil: si el local storage está lleno
+  */
+  var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales")); //recupera datos del json
   let miPerfil = "";
   if (contenidoMiPerfil != null && showForm) {//si el contenido no es nulo y el showform es true
+    //coloca en el "value" de los campos la información que ya se encontraba en el local storage
     document.getElementById("perfil").innerHTML = ('afterend', `
         <div style="display:contents;" class="modal fade" id="datosPersonalesVacio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -125,23 +114,15 @@ function renderProfile(showForm = false) {
               <div class="invalid-feedback">Falta ingresar tu email.</div>
               <div class="valid-feedback">¡Genial!</div>           
             </div>
-          </div>  
-          <div class="col-lg-6">
-            <label for="zip">Tu foto de perfil</label>
-            <div class="needsclick dz-clickable" id="file-upload">
-              <div class="dz-message needsclick">
-                Arrastra tus fotos aquí<br>
-              </div>
-            </div>
           </div>   
         </div>  
         <div class="modal-footer">
-          <button type="submit" id="comprobarModificaciones" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales(event)">Listo</button>
+          <button type="submit" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales(event)">Listo</button>
         </div>
       </form>
       </div>
       </div>` )
-  } else if (contenidoMiPerfil === null) { //si no hay nada en el local storage
+  } else if (contenidoMiPerfil === null) { //si el local storage es nulo, o sea no se cargaron datos muestra form inicial
     document.getElementById("sinPerfil").innerHTML = (`
         <div style="display:contents;" class="modal fade" id="datosPersonalesVacio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -196,14 +177,6 @@ function renderProfile(showForm = false) {
               <div class="valid-feedback">¡Genial!</div>           
             </div>
           </div>  
-          <div class="col-lg-6">
-            <label for="zip">Tu foto de perfil</label>
-            <div class="needsclick dz-clickable" id="file-upload">
-              <div class="dz-message needsclick">
-                Arrastra tus fotos aquí<br>
-              </div>
-            </div>
-          </div>   
         </div>  
         <div class="modal-footer">
           <button type="submit" id="comprobarDatos" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales(event)">Listo</button>
@@ -212,15 +185,21 @@ function renderProfile(showForm = false) {
       </div>
       </div>` )
 
-  } else { //si el local storage esta lleno
+  } else { //si el local storage esta lleno, muestra el perfil obteniendo datos del local storage
+
+    var contenidoCarrito = JSON.parse(localStorage.getItem("contenidoCarrito")); 
+    //llama al local storage para saber la cantidad de productos comprados
+    for (let i = 0; i < contenidoCarrito.length; i++) {
+    cantidadProdCarrito = contenidoCarrito.length;}
+
     miPerfil = ` <section class="intro-section">
     <div class="container">
       <div class="row">
         <div class="col-md-1 col-lg-2"></div>
         <div class="col-md-10 col-lg-8">
           <div class="intro">
-            <div class="profile-img">
-              <img src="/img/facebook-icon.png">
+            <div class="profile-img" id="fotoPerfil">
+            <a href="https://ibb.co/v192Pmj"><img src="https://i.ibb.co/rk9n6Mw/Whats-App-Image-2020-10-24-at-4-51-30-PM.jpg" border="0"></a>
             </div>
           <h2>
             <b id="nombreUser">${contenidoMiPerfil.nombres} ${contenidoMiPerfil.apellidos}</b>
@@ -234,7 +213,7 @@ function renderProfile(showForm = false) {
               <b>TELÉFONO: </b><span id="telUser">${contenidoMiPerfil.telefono}</span>
             </li>
             <li>
-              <b>PRODUCTOS COMPRADOS: </b><span id="compradosUser">25</span>
+              <b>PRODUCTOS COMPRADOS: </b><span id="compradosUser">${cantidadProdCarrito}</span>
             </li>
           </ul>
           </div>
@@ -247,19 +226,18 @@ function renderProfile(showForm = false) {
     </section> <div class="container"> <div class="row" style="justify-content:center"> <h3 style="margin-top:0.5em; margin-bottom:1em">Mira los productos que compraste:</h3></div>
     <div class="row" id="productosComprados"></div></div>`
     
-    document.getElementById("perfil").innerHTML = miPerfil;
+    document.getElementById("perfil").innerHTML = miPerfil; 
     
-    var contenidoCarrito = JSON.parse(localStorage.getItem("contenidoCarrito"));
-    for (let i = 0; i < contenidoCarrito.length; i++) {
+    var contenidoCarrito = JSON.parse(localStorage.getItem("contenidoCarrito")); 
+    //vuelve a llamar al local storage, esta vez para mostrar los productos comprados debajo de la portada de perfil
+    for (let i = 0; i < contenidoCarrito.length; i++) { //recorre el listado de productos
     let productoCarrito = contenidoCarrito[i];
     cantidadProdCarrito = contenidoCarrito.length;
 
-    console.log(contenidoCarrito)
-    
     if(productoCarrito.currency == "UYU") {
       productoCarrito.unitCost = (productoCarrito.unitCost / 40).toFixed(0);
       productoCarrito.currency = "USD";
-      }
+      } //convierte la moneda a dólares 
     
     document.getElementById("productosComprados").innerHTML += (`
       <div class="col-sm-4">
@@ -273,106 +251,43 @@ function renderProfile(showForm = false) {
         </div>
       </div>
     </div>
-      `)
+      `) //muestra los productos comprados 
     } 
 
     } 
 }
 
-
-{/* <div class="btn-group">
-<button type="button" class="btn btn-sm btn-outline-secondary">Volver a comprar</button>
-</div> */}
-
-/* function volverAComprar(producto){
-  var contenidoCarrito = JSON.parse(localStorage.getItem("contenidoCarrito"));
-  var productoASumar = producto.dataset.value; console.log(productoASumar);
-  contenidoCarrito.push(productoASumar);
-  console.log(contenidoCarrito);
-}
- */
-
-
-
-//función que obtiene la fecha al momento de hacer el comentario y la formatea de a misma forma que el resto de comentarios
+//función que obtiene la fecha actual
 var nuevaFecha = new Date();
-var d = nuevaFecha.getDate();
-var dia = (d < 10) ? '0' + d : d;
-var m = nuevaFecha.getMonth() + 1;
-var mes = (m < 10) ? '0' + m : m;
-var fechaHoy = nuevaFecha.getFullYear() + "-" + mes + "-" + dia;
-var hora = nuevaFecha.getHours() + ":" + nuevaFecha.getMinutes() + ":" + nuevaFecha.getSeconds();
+nuevaFecha.getFullYear()
 
-function calcularEdad() {
+function calcularEdad() { //calcula la edad en base a lo ingresado en el calendario de form
   var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales"));
-  var arrayFecha = contenidoMiPerfil.edad.split("-");
-  var añoFecha = arrayFecha[0];
-  var añoNacimiento = nuevaFecha.getFullYear() - añoFecha;
+  var arrayFecha = contenidoMiPerfil.edad.split("-"); //cnvierte la fecha del calendario en un array sacando los guiones
+  var añoFecha = arrayFecha[0]; //obtiene el año de nacimiento
+  var añoNacimiento = nuevaFecha.getFullYear() - añoFecha; //resta el año de nacimiento con el año actual 
   return añoNacimiento
-}
+} 
 
 
-document.getElementById("comprobarDatos").addEventListener("submit", function () {
+document.getElementById("comprobarDatos").addEventListener("submit", function () { //funcion que pone o quita clases segun los campos del formulario
   var nombresUsuario = document.getElementById("nombres");
   var chequeCruz = document.getElementById("cheque");
 
+  //saca todas las clases que tenga inicialmente
   nombresUsuario.classList.remove('is-invalid');
   nombresUsuario.classList.remove('is-valid');
   chequeCruz.classList.remove('invalido');
   chequeCruz.classList.remove('valido');
 
-  if (nombresUsuario.value === "") {
+  if (nombresUsuario.value === "") { //si el campo es vacio, coloca las clases de invalido
     nombresUsuario.classList.add('is-invalid');
     chequeCruz.classList.add('invalido');
   } else {
-    nombresUsuario.classList.add('is-valid');
+    nombresUsuario.classList.add('is-valid'); //de lo contrario, colocal las clases de valido
     chequeCruz.classList.add('valido');
   }
 })
-
-document.getElementById("comprobarModificaciones").addEventListener("submit", function () {
-  var nombresUsuario = document.getElementById("nombres");
-  var chequeCruz = document.getElementById("cheque");
-
-  nombresUsuario.classList.remove('is-invalid');
-  nombresUsuario.classList.remove('is-valid');
-  chequeCruz.classList.remove('invalido');
-  chequeCruz.classList.remove('valido');
-
-  if (nombresUsuario.value === "") {
-    nombresUsuario.classList.add('is-invalid');
-    chequeCruz.classList.add('invalido');
-  } else {
-    nombresUsuario.classList.add('is-valid');
-    chequeCruz.classList.add('valido');
-  }
-})
-
-
-  (function () {
-    'use strict';
-    window.addEventListener('load', function () {
-      // Get the forms we want to add validation styles to
-      var forms = document.getElementsByClassName('needs-validation');
-      // Loop over them and prevent submission
-      var validation = Array.prototype.filter.call(forms, function (form) {
-        form.addEventListener('submit', function (event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  })();
-
-/* var nombresUsuario = document.getElementById("nombres");
-  var apellidosUsuario = document.getElementById("apellidos");
-  var edad = document.getElementById("fechaNacimiento");
-  var telefonoUsuario = document.getElementById("telefono");
-  var emailUsuario = document.getElementById("email"); */
-
 
 
 

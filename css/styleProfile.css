@@ -78,7 +78,7 @@ ul {
   position: relative;
   background-size: cover;
   z-index: 1;
-  background-image: url("../img/portada-mi-perfil2.jpg");
+  background-image: url("../img/fondo_mi_perfil.jpg");
 }
 
 .intro-section:before {
