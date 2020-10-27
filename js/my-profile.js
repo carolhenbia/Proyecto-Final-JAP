@@ -25,7 +25,7 @@ function agregarDatosPersonales(e) {  //agarra los valores en el form y los conv
       email: emailUsuario.value,
       imagen: "https://i.ibb.co/rk9n6Mw/Whats-App-Image-2020-10-24-at-4-51-30-PM.jpg"
     };
-    localStorage.setItem("datosPersonales", JSON.stringify(datosPersonales));
+    sessionStorage.setItem("datosPersonales", JSON.stringify(datosPersonales));
     cargarProfile();
   }
   var formularioInicial = document.getElementById("formInicial");
@@ -55,7 +55,7 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
   2. Formulario inicial: si el local storage está vacío
   3. Mostrar perfil: si el local storage está lleno
   */
-  var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales")); //recupera datos del json
+  var contenidoMiPerfil = JSON.parse(sessionStorage.getItem("datosPersonales")); //recupera datos del json
   let miPerfil = "";
   if (contenidoMiPerfil != null && showForm) {//si el contenido no es nulo y el showform es true
     //coloca en el "value" de los campos la información que ya se encontraba en el local storage
@@ -261,7 +261,7 @@ var nuevaFecha = new Date();
 nuevaFecha.getFullYear()
 
 function calcularEdad() { //calcula la edad en base a lo ingresado en el calendario de form
-  var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales"));
+  var contenidoMiPerfil = JSON.parse(sessionStorage.getItem("datosPersonales"));
   var arrayFecha = contenidoMiPerfil.edad.split("-"); //cnvierte la fecha del calendario en un array sacando los guiones
   var añoFecha = arrayFecha[0]; //obtiene el año de nacimiento
   var añoNacimiento = nuevaFecha.getFullYear() - añoFecha; //resta el año de nacimiento con el año actual 

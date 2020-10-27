@@ -31,6 +31,7 @@ function logOut() {
     }); */ //LO PUSE EN COMENTARIOS PORQUE EL LOGOUT DE GOOGLE NO SALE, (LO QUE VIMOS EN CLASE)
     window.localStorage.removeItem("isLoggedIn");
     window.location.href = "login.html" //lo manda al login 
+    window.sessionStorage.clear();
 
 }   
 
