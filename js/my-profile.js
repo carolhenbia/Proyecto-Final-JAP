@@ -14,6 +14,7 @@ function agregarDatosPersonales(e) {  //agarra los valores en el form y los conv
   var edad = document.getElementById("fechaNacimiento");
   var telefonoUsuario = document.getElementById("telefono");
   var emailUsuario = document.getElementById("email");
+  var fotoUsuario = document.getElementById("foto");
   
   if (nombresUsuario.value != "" && apellidosUsuario.value != ""
     && edad.value != "" && telefonoUsuario.value != "" && emailUsuario.value != "") {
@@ -23,7 +24,7 @@ function agregarDatosPersonales(e) {  //agarra los valores en el form y los conv
       edad: edad.value,
       telefono: telefonoUsuario.value,
       email: emailUsuario.value,
-      imagen: "https://i.ibb.co/rk9n6Mw/Whats-App-Image-2020-10-24-at-4-51-30-PM.jpg"
+      imagen: fotoUsuario.value,
     };
     sessionStorage.setItem("datosPersonales", JSON.stringify(datosPersonales));
     cargarProfile();
@@ -113,7 +114,16 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
               <div class="invalid-feedback">Falta ingresar tu email.</div>
               <div class="valid-feedback">¡Listo!</div>           
             </div>
-          </div>   
+          </div>  
+          <div class="col-lg-6">
+            <div class="md-form md-outline mb-0 mb-lg-4">
+              <label for="foto">Foto de perfil</label>
+              <input value="${contenidoMiPerfil.imagen}" type="text" name="archivosubido" placeholder="Elige una foto de perfil" class="form-control mb-0 mb-lg-2" 
+              style="margin-bottom:1em !important;" name="foto" id="foto" required>
+              <div class="invalid-feedback">Falta elegir una imagen.</div>
+              <div class="valid-feedback">¡Listo!</div>            
+            </div>
+          </div> 
         </div>  
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales(event)">Listo</button>
@@ -125,7 +135,7 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
     document.getElementById("sinPerfil").innerHTML = (`
         <div style="display:contents;" class="modal fade" id="datosPersonalesVacio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-    <form id="formInicial">
+    <form id="formInicial" enctype="multipart/form-data">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">¡Antes de empezar, ingresa tus datos personales!</h5>
@@ -176,6 +186,15 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
               <div class="valid-feedback">¡Genial!</div>           
             </div>
           </div>  
+          <div class="col-lg-6">
+            <div class="md-form md-outline mb-0 mb-lg-4">
+              <label for="foto">Foto de perfil</label>
+              <input type="text" name="archivosubido" placeholder="Elige una foto de perfil" class="form-control mb-0 mb-lg-2" 
+              style="margin-bottom:1em !important;" name="foto" id="foto" required>  
+              <div class="invalid-feedback">Falta elegir una imagen.</div>
+              <div class="valid-feedback">¡Listo!</div>              
+            </div>
+          </div>  
         </div>  
         <div class="modal-footer">
           <button type="submit" id="comprobarDatos" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales(event)">Listo</button>
@@ -198,7 +217,7 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
         <div class="col-md-10 col-lg-8">
           <div class="intro">
             <div class="profile-img" id="fotoPerfil">
-            <a href="https://ibb.co/v192Pmj"><img src="https://i.ibb.co/rk9n6Mw/Whats-App-Image-2020-10-24-at-4-51-30-PM.jpg" border="0"></a>
+            <img src="${contenidoMiPerfil.imagen}" border="0">
             </div>
           <h2>
             <b id="nombreUser">${contenidoMiPerfil.nombres} ${contenidoMiPerfil.apellidos}</b>
@@ -222,7 +241,7 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
         </div>
       </div>
     </div>
-    </section> <div class="container"> <div class="row" style="justify-content:center"> <h3 style="margin-top:0.5em; margin-bottom:1em">Mira los productos que compraste:</h3></div>
+    </section> <div class="container"> <div class="row" style="justify-content:center"> <h3 style="margin-top:0.5em; margin-bottom:1em; font-size:1.5em">Mira los productos que compraste:</h3></div>
     <div class="row" id="productosComprados"></div></div>`
     
     document.getElementById("perfil").innerHTML = miPerfil; 
@@ -239,7 +258,7 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
       } //convierte la moneda a dólares 
     
     document.getElementById("productosComprados").innerHTML += (`
-      <div class="col-sm-4">
+      <div class="col-sm-6 col-md-4">
       <div class="card mb-4 shadow-sm">
       <img class="bd-placeholder-img card-img-top" width="100%" height="250" 
       src="${productoCarrito.src}"></img>
@@ -287,14 +306,3 @@ document.getElementById("comprobarDatos").addEventListener("submit", function ()
     chequeCruz.classList.add('valido');
   }
 })
-
-
-//coso de dropzone para probar en la imagen
-
-/*     //Configuraciones para el elemento que sube archivos
-    var dzoptions = {
-      url:"/",
-      autoQueue: false
-  };
-  var myDropzone = new Dropzone("div#file-upload", dzoptions);    
- */
