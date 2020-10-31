@@ -118,7 +118,7 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
           <div class="col-lg-6">
             <div class="md-form md-outline mb-0 mb-lg-4">
               <label for="foto">Foto de perfil</label>
-              <input value="${contenidoMiPerfil.imagen}" type="text" name="archivosubido" placeholder="Elige una foto de perfil" class="form-control mb-0 mb-lg-2" 
+              <input value="${contenidoMiPerfil.imagen}" type="text" name="archivosubido" placeholder="Coloca el link de tu foto" class="form-control mb-0 mb-lg-2" 
               style="margin-bottom:1em !important;" name="foto" id="foto" required>
               <div class="invalid-feedback">Falta elegir una imagen.</div>
               <div class="valid-feedback">¡Listo!</div>            
@@ -189,7 +189,7 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
           <div class="col-lg-6">
             <div class="md-form md-outline mb-0 mb-lg-4">
               <label for="foto">Foto de perfil</label>
-              <input type="text" name="archivosubido" placeholder="Elige una foto de perfil" class="form-control mb-0 mb-lg-2" 
+              <input type="text" name="archivosubido" placeholder="Coloca el link de tu foto" class="form-control mb-0 mb-lg-2" 
               style="margin-bottom:1em !important;" name="foto" id="foto" required>  
               <div class="invalid-feedback">Falta elegir una imagen.</div>
               <div class="valid-feedback">¡Listo!</div>              
