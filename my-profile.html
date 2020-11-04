@@ -50,19 +50,22 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="usuario">Usuarie:</a>
         <div class="dropdown-menu">
           <a href="my-profile.html" class="dropdown-item"><i class="fas fa-user"></i> Mi Perfil</a>
-          <a href="cart.html" class="dropdown-item"><i class="fas fa-shopping-cart"><span class="badge badge-pill badge-info" id="badge" style="vertical-align: super; background-color: #e72a79; font-family: 'Raleway', serif !important; font-weight: 600;"></span></i> Mi Carrito</a>
+          <a href="cart.html" class="dropdown-item"><i class="fas fa-shopping-cart"><span
+                class="badge badge-pill badge-info" id="badge"
+                style="vertical-align: super; background-color: #e72a79; font-family: 'Raleway', serif !important; font-weight: 600;"></span></i>
+            Mi Carrito</a>
           <a href="#" class="dropdown-item" onclick="logOut()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
         </div>
       </div>
     </div>
   </nav>
-  
+
   <main id="perfil">
-    <div id="sinPerfil" style="margin-top: 3em;"> 
+    <div id="sinPerfil" style="margin-top: 3em;">
     </div>
   </main>
 
-  
+
   <footer class="text-muted bg-light">
     <div class="container">
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
@@ -90,6 +93,12 @@
   <script src="js/my-profile.js"></script>
   <script src="js/index.js"></script>
   <script src="js/cart.js"></script>
+  <script>
+    var loadFile = function (event) { //se activa cuando se sube una imagen
+      var image = document.getElementById('foto'); 
+      image.src = URL.createObjectURL(event.target.files[0]); // convierte el file en una URL
+    };
+  </script>
 </body>
 
 </html>

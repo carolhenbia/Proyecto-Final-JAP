@@ -24,9 +24,9 @@ function agregarDatosPersonales(e) {  //agarra los valores en el form y los conv
       edad: edad.value,
       telefono: telefonoUsuario.value,
       email: emailUsuario.value,
-      imagen: fotoUsuario.value,
+      imagen: fotoUsuario.src,
     };
-    sessionStorage.setItem("datosPersonales", JSON.stringify(datosPersonales));
+    localStorage.setItem("datosPersonales", JSON.stringify(datosPersonales));
     cargarProfile();
   }
   var formularioInicial = document.getElementById("formInicial");
@@ -56,7 +56,7 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
   2. Formulario inicial: si el local storage está vacío
   3. Mostrar perfil: si el local storage está lleno
   */
-  var contenidoMiPerfil = JSON.parse(sessionStorage.getItem("datosPersonales")); //recupera datos del json
+  var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales")); //recupera datos del json
   let miPerfil = "";
   if (contenidoMiPerfil != null && showForm) {//si el contenido no es nulo y el showform es true
     //coloca en el "value" de los campos la información que ya se encontraba en el local storage
@@ -116,14 +116,16 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
             </div>
           </div>  
           <div class="col-lg-6">
-            <div class="md-form md-outline mb-0 mb-lg-4">
-              <label for="foto">Foto de perfil</label>
-              <input value="${contenidoMiPerfil.imagen}" type="text" name="archivosubido" placeholder="Coloca el link de tu foto" class="form-control mb-0 mb-lg-2" 
-              style="margin-bottom:1em !important;" name="foto" id="foto" required>
-              <div class="invalid-feedback">Falta elegir una imagen.</div>
-              <div class="valid-feedback">¡Listo!</div>            
+            <div class="md-form md-outline mb-0 mb-lg-4">     
+              <label for="foto">Foto de perfil</label> 
+              <input type="file" accept="image/*" class="form-control mb-0 mb-lg-2"
+              name="image" id="file"  onchange="loadFile(event)" style="display: none;" required>
+              <b><label for="file" style="cursor: pointer;" class="form-control btn-comprar mb-0 mb-lg-2">Sube tu imagen</label></b>
+              <p><img id="foto" src="${contenidoMiPerfil.imagen}" width="200" /></p>    
+              <div class="invalid-feedback">Esta es tu imagen actual.</div>
+              <div class="valid-feedback">¡Listo!</div>       
             </div>
-          </div> 
+          </div>  
         </div>  
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary btn-comprar" onclick="agregarDatosPersonales(event)">Listo</button>
@@ -187,13 +189,13 @@ function cargarProfile(showForm = false) { //inicialmente se le manda un "false"
             </div>
           </div>  
           <div class="col-lg-6">
-            <div class="md-form md-outline mb-0 mb-lg-4">
-              <label for="foto">Foto de perfil</label>
-              <input type="text" name="archivosubido" placeholder="Coloca el link de tu foto" class="form-control mb-0 mb-lg-2" 
-              style="margin-bottom:1em !important;" name="foto" id="foto" required>  
+            <label for="foto">Foto de perfil</label> 
+              <input type="file" accept="image/*" class="form-control mb-0 mb-lg-2"
+              name="image" id="file"  onchange="loadFile(event)" style="display: none; margin-bottom:1em !important;" required>
+              <b><label for="file" style="cursor: pointer;" class="form-control btn-comprar mb-0 mb-lg-2">Sube tu imagen</label></b>
+              <p><img id="foto" width="200" /></p>    
               <div class="invalid-feedback">Falta elegir una imagen.</div>
-              <div class="valid-feedback">¡Listo!</div>              
-            </div>
+              <div class="valid-feedback">¡Listo!</div>   
           </div>  
         </div>  
         <div class="modal-footer">
@@ -280,7 +282,7 @@ var nuevaFecha = new Date();
 nuevaFecha.getFullYear()
 
 function calcularEdad() { //calcula la edad en base a lo ingresado en el calendario de form
-  var contenidoMiPerfil = JSON.parse(sessionStorage.getItem("datosPersonales"));
+  var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales"));
   var arrayFecha = contenidoMiPerfil.edad.split("-"); //cnvierte la fecha del calendario en un array sacando los guiones
   var añoFecha = arrayFecha[0]; //obtiene el año de nacimiento
   var añoNacimiento = nuevaFecha.getFullYear() - añoFecha; //resta el año de nacimiento con el año actual 
@@ -306,3 +308,5 @@ document.getElementById("comprobarDatos").addEventListener("submit", function ()
     chequeCruz.classList.add('valido');
   }
 })
+
+
