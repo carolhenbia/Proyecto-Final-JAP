@@ -283,7 +283,7 @@ nuevaFecha.getFullYear()
 
 function calcularEdad() { //calcula la edad en base a lo ingresado en el calendario de form
   var contenidoMiPerfil = JSON.parse(localStorage.getItem("datosPersonales"));
-  var arrayFecha = contenidoMiPerfil.edad.split("-"); //cnvierte la fecha del calendario en un array sacando los guiones
+  var arrayFecha = contenidoMiPerfil.edad.split("-"); //convierte la fecha del calendario en un array sacando los guiones
   var añoFecha = arrayFecha[0]; //obtiene el año de nacimiento
   var añoNacimiento = nuevaFecha.getFullYear() - añoFecha; //resta el año de nacimiento con el año actual 
   return añoNacimiento
